@@ -1,41 +1,59 @@
+import useInvestedValues from "../../hooks/useInvestedValues";
+import useOpenClosedPositions from "../../hooks/useOpenClosedPositions";
+import InvestedValuesCard from "./InvestedValuesCard";
+
 const InvestedValues = () => {
+  const [
+    propertiesInvestedValue,
+    cryptoInvestedValue,
+    rareMetalsInvestedValue,
+    stocksInvestedValue,
+    totalInvestedValue,
+  ] = useInvestedValues();
+
+  const [
+    propertiesOpenClosedPositions,
+    cryptoOpenClosedPositions,
+    rareMetalsOpenClosedPositions,
+    stocksOpenClosedPositions,
+    totalOpenClosedPositions,
+  ] = useOpenClosedPositions();
+
   return (
     <div className="animate-fadeIn flex-col">
       <h1 className="flex justify-start text-2xl font-bold">Invested Value:</h1>
 
       <div className="mt-3 flex justify-start">
         <div className="stats flex w-96 flex-col bg-base-200 p-5 text-center shadow-xl lg:w-auto lg:flex-row">
-          <div className="stat">
-            <div className="stat-title">Total Invested Value</div>
-            <div className="stat-value">$89,400</div>
-            <div className="stat-desc text-center">17 open / 14 closed</div>
-          </div>
+          <InvestedValuesCard
+            title={"Total Invested Value"}
+            value={totalInvestedValue}
+            openClosedPositions={totalOpenClosedPositions}
+          />
 
-          <div className="stat ">
-            <div className="stat-title">Properties</div>
-            <div className="stat-value">$89,400</div>
-            <div className="stat-desc text-center">17 open / 14 closed</div>
-          </div>
+          <InvestedValuesCard
+            title={"Properties"}
+            value={propertiesInvestedValue}
+            openClosedPositions={propertiesOpenClosedPositions}
+          />
 
-          <div className="stat">
-            <div className="stat-title">Crypto</div>
-            <div className="stat-value">$89,400</div>
-            <div className="stat-desc text-center">17 open / 14 closed</div>
-          </div>
+          <InvestedValuesCard
+            title={"Stocks"}
+            value={stocksInvestedValue}
+            openClosedPositions={stocksOpenClosedPositions}
+          />
 
-          <div className="stat">
-            <div className="stat-title">Stocks</div>
-            <div className="stat-value">$89,400</div>
-            <div className="stat-desc text-center">17 open / 14 closed</div>
-          </div>
+          <InvestedValuesCard
+            title={"Crypto"}
+            value={cryptoInvestedValue}
+            openClosedPositions={cryptoOpenClosedPositions}
+          />
 
-          <div className="stat">
-            <div className="stat-title">Rare Materials</div>
-            <div className="stat-value">$89,400</div>
-            <div className="stat-desc mt-2 text-center">
-              17 open / 14 closed
-            </div>
-          </div>
+          <InvestedValuesCard
+            title={"Rare Metals"}
+            value={rareMetalsInvestedValue}
+            openClosedPositions={rareMetalsOpenClosedPositions}
+          />
         </div>
       </div>
     </div>

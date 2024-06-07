@@ -27,7 +27,7 @@ const InvestmentsGrowthChart = () => {
     },
     xAxis: {
       title: {
-        text: "Value",
+        text: "Date",
         style: {
           color: color,
         },

@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ThemeType } from "../../models/ThemeType";
+import { ThemeType } from "../../models/enums/ThemeType";
 
 interface IPageSettingsState {
   theme: string;

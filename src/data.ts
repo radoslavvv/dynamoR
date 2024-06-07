@@ -1,4 +1,4 @@
-import { InvestmentData } from "./interfaces";
+import { InvestmentData } from "./models/interfaces";
 
 export const properties: InvestmentData = {
 	marketPrices: [
