@@ -9,6 +9,8 @@ import {
   loadRareMetalsData,
   loadStocksData,
 } from "../../api/client-api";
+import { ITransaction } from "../../models/contracts/ITransaction";
+import { AssetType } from "../../models/enums/AssetType";
 
 interface IAssetsState {
   properties: IInvestmentData | null;
@@ -72,6 +74,58 @@ export const AssetsSlice = createSlice({
     setStocks: (state, action: PayloadAction<IInvestmentData>) => {
       state.stocks = { ...action.payload };
     },
+    closePosition: (
+      state,
+      action: PayloadAction<{
+        transaction: ITransaction;
+        assetType: AssetType;
+        name: string;
+      }>,
+    ) => {
+      let assets = null;
+
+      switch (action.payload.assetType) {
+        case AssetType.Crypto:
+          assets = state.crypto;
+          break;
+        case AssetType.Property:
+          assets = state.properties;
+          break;
+        case AssetType.RareMetal:
+          assets = state.rareMetals;
+          break;
+        case AssetType.Stock:
+          assets = state.stocks;
+          break;
+      }
+
+      const asset = assets?.walletBalance.find(
+        (wb) =>
+          wb.address === action.payload.name || wb.name === action.payload.name,
+      );
+
+      if (asset) {
+        asset.transactions = [
+          ...asset.transactions,
+          action.payload.transaction,
+        ];
+
+        // switch (action.payload.assetType) {
+        //   case AssetType.Crypto:
+        //     state.crypto = assets;
+        //     break;
+        //   case AssetType.Property:
+        //     assets = state.properties;
+        //     break;
+        //   case AssetType.RareMetal:
+        //     assets = state.rareMetals;
+        //     break;
+        //   case AssetType.Stock:
+        //     assets = state.stocks;
+        //     break;
+        // }
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPropertiesData.fulfilled, (state, action) => {
@@ -92,7 +146,12 @@ export const AssetsSlice = createSlice({
   },
 });
 
-export const { setCrypto, setProperties, setRareMaterials, setStocks } =
-  AssetsSlice.actions;
+export const {
+  setCrypto,
+  setProperties,
+  setRareMaterials,
+  setStocks,
+  closePosition,
+} = AssetsSlice.actions;
 
 export default AssetsSlice;

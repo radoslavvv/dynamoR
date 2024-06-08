@@ -8,6 +8,8 @@ import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
 
 import { DATE_FORMAT } from "./constants";
 import { ISeriesPrice } from "../models/contracts/ISeriesPrice";
+import { IWalletBalance } from "../models/contracts/IWalletBalance";
+import { ITransaction } from "../models/contracts/ITransaction";
 
 export const formatNumber = (number: number): string => {
   const formatter = new Intl.NumberFormat("en-US", {
@@ -68,6 +70,24 @@ export const getLastAssetPrice = (
   }
 
   return marketPrice.seriesPrice[marketPrice.seriesPrice.length - 1].value;
+};
+
+export const getLastAssetTransaction = (
+  walletBalance: IWalletBalance[],
+  assetType: AssetType,
+  filterValue: string,
+): ITransaction | null => {
+  const asset = walletBalance.filter((wb) => {
+    return assetType === AssetType.Property
+      ? wb.address === filterValue
+      : wb.name === filterValue;
+  })[0];
+
+  if (!asset) {
+    return null;
+  }
+
+  return asset.transactions[asset.transactions.length - 1];
 };
 
 export const getAssetSeriesPrices = (
@@ -248,6 +268,8 @@ export const getLastInvestmentsData = (
           : lastTransaction.open!,
       marketPrice: marketPrice || 0,
       seriesPrice: seriesPrices,
+      assetType: assetType,
+      transactions: currentAsset.transactions
     });
   }
 
