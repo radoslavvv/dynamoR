@@ -1,15 +1,12 @@
 import { FiMoon, FiSun } from "react-icons/fi";
-import { setThemeType } from "../../store/features/PageSettingsSlice";
-import { ThemeType } from "../../models/enums/ThemeType";
-import { useAppDispatch } from "../../store/store";
-// import { RootState, useAppDispatch } from "../../store/store";
-// import { useSelector } from "react-redux";
 
-const ThemeChanger = () => {
+import { useAppDispatch } from "../../store/store";
+import { setThemeType } from "../../store/features/PageSettingsSlice";
+
+import { ThemeType } from "../../models/enums/ThemeType";
+
+const ThemeChanger = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  // const themeType: ThemeType = useSelector(
-  //   (state: RootState) => state.pageSettings.themeType,
-  // );
 
   const updateThemeType = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {

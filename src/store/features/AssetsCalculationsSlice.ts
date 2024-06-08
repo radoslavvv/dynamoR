@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { IOpenClosedPositions } from "../../models/contracts/IOpenClosedPositions";
 import { ILastInvestmentData } from "../../models/contracts/ILastInvestmentData";
 

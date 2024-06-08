@@ -1,4 +1,5 @@
 import { IOpenClosedPositions } from "../../models/contracts/IOpenClosedPositions";
+
 import { formatNumber } from "../../utils/assets-helper";
 
 interface IInvestedValuesCardProps {
@@ -11,7 +12,7 @@ const InvestedValuesCard = ({
   title,
   value,
   openClosedPositions,
-}: IInvestedValuesCardProps) => {
+}: IInvestedValuesCardProps): JSX.Element => {
   return (
     <div className="stat">
       <div className="stat-title">{title}</div>

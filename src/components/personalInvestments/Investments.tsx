@@ -1,10 +1,13 @@
 import React from "react";
-import useInvestments from "../../hooks/useInvestments";
+
 import InvestmentTableCard from "./InvestmentTableCard";
+
 import { AssetType } from "../../models/enums/AssetType";
+
+import useInvestments from "../../hooks/useInvestments";
 import { getInvestmentTabTableData } from "../../utils/assets-helper";
 
-const Investments = () => {
+const Investments = (): JSX.Element => {
   const [
     stocksLastInvestmentData,
     propertiesLastInvestmentData,

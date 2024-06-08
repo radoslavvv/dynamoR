@@ -1,8 +1,9 @@
-import useInvestedValues from "../../hooks/useInvestedValues";
-import useOpenClosedPositions from "../../hooks/useOpenClosedPositions";
 import InvestedValuesCard from "./InvestedValuesCard";
 
-const InvestedValues = () => {
+import useInvestedValues from "../../hooks/useInvestedValues";
+import useOpenClosedPositions from "../../hooks/useOpenClosedPositions";
+
+const InvestedValues = (): JSX.Element => {
   const [
     propertiesInvestedValue,
     cryptoInvestedValue,

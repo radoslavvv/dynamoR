@@ -1,9 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import AccountSettings from "../pages/AccountSettings";
 import PersonalInvestments from "../pages/PersonalInvestments";
+
 import routesConfig from "../routes/routes";
 
-const Main = () => {
+const Main = (): JSX.Element => {
   return (
     <Routes>
       <Route

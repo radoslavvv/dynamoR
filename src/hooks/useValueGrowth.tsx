@@ -1,20 +1,23 @@
 import React from "react";
-import { RootState, useAppDispatch } from "../store/store";
+import moment from "moment";
 import { useSelector } from "react-redux";
-import {
-  getInvestmentValueByMonths,
-  getMonthsLastDates,
-} from "../utils/assets-helper";
-import { IInvestmentData } from "../models/contracts/IInvestmentData";
-import { AssetType } from "../models/enums/AssetType";
+
 import {
   setCryptoValueByMonth,
   setPropertiesValueByMonth,
   setRareMetalsValueByMonth,
   setStocksValueByMonth,
 } from "../store/features/AssetsCalculationsSlice";
-import moment from "moment";
+import { RootState, useAppDispatch } from "../store/store";
+
+import { AssetType } from "../models/enums/AssetType";
 import { ThemeType } from "../models/enums/ThemeType";
+import { IInvestmentData } from "../models/contracts/IInvestmentData";
+
+import {
+  getInvestmentValueByMonths,
+  getMonthsLastDates,
+} from "../utils/assets-helper";
 import { DATE_FORMAT } from "../utils/constants";
 
 const useValueGrowth = () => {

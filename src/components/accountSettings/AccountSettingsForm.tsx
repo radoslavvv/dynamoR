@@ -1,6 +1,6 @@
 import useUserData from "../../hooks/useUserData";
 
-const AccountSettingsForm = () => {
+const AccountSettingsForm = (): JSX.Element => {
   const { userData } = useUserData();
 
   return (

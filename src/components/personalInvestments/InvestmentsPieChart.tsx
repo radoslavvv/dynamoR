@@ -1,8 +1,9 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+
 import useValueAllocation from "../../hooks/useValueAllocation";
 
-const InvestmentsPieChart = () => {
+const InvestmentsPieChart = (): JSX.Element => {
   const { chartOptions } = useValueAllocation();
 
   return (

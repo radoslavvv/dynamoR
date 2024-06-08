@@ -1,10 +1,12 @@
 import moment from "moment";
-import { IInvestmentData } from "../models/contracts/IInvestmentData";
-import { IMarketPrice } from "../models/contracts/IMarketPrice";
-import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
+
 import { AssetType } from "../models/enums/AssetType";
-import { DATE_FORMAT } from "./constants";
+import { IMarketPrice } from "../models/contracts/IMarketPrice";
+import { IInvestmentData } from "../models/contracts/IInvestmentData";
+import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
 import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
+
+import { DATE_FORMAT } from "./constants";
 
 export const formatNumber = (number: number): string => {
   const formatter = new Intl.NumberFormat("en-US", {
@@ -18,7 +20,7 @@ export const formatNumber = (number: number): string => {
 export const getAssetInvestedValue = (
   data: IInvestmentData,
   assetType: AssetType,
-) => {
+): number => {
   let value: number = 0;
 
   for (let i = 0; i < data.walletBalance.length; i++) {
@@ -51,7 +53,7 @@ export const getLastAssetPrice = (
   marketPrices: IMarketPrice[],
   assetType: AssetType,
   filterValue: string,
-) => {
+): number | null => {
   const marketPrice = marketPrices.filter((mp) => {
     if (assetType === AssetType.Property) {
       return mp.address === filterValue;
@@ -70,7 +72,7 @@ export const getLastAssetPrice = (
 export const getOpenClosedPositionsCount = (
   investmentData: IInvestmentData,
   assetType: AssetType,
-) => {
+): IOpenClosedPositions => {
   const openClosedPositionsCount: IOpenClosedPositions = {
     openCount: 0,
     closedCount: 0,
@@ -101,7 +103,9 @@ export const getOpenClosedPositionsCount = (
   return openClosedPositionsCount;
 };
 
-export const getMonthsLastDates = (investmentData: IInvestmentData) => {
+export const getMonthsLastDates = (
+  investmentData: IInvestmentData,
+): string[] => {
   const lastDates = [];
 
   const seriesPrices = investmentData.marketPrices[0].seriesPrice;
@@ -125,7 +129,7 @@ export const getMonthsLastDates = (investmentData: IInvestmentData) => {
 export const getInvestmentValueByMonths = (
   investmentData: IInvestmentData,
   assetType: AssetType,
-) => {
+): number[] => {
   const investmentValueByMonths: number[] = [];
 
   const monthsLastDates = getMonthsLastDates(investmentData);
@@ -180,7 +184,7 @@ export const getInvestmentValueByMonths = (
 export const getLastInvestmentsData = (
   investmentData: IInvestmentData,
   assetType: AssetType,
-) => {
+): ILastInvestmentData[] => {
   const lastInvestmentData: ILastInvestmentData[] = [];
   for (let i = 0; i < investmentData.walletBalance.length; i++) {
     const currentAsset = investmentData.walletBalance[i];
@@ -228,7 +232,7 @@ export const getInvestmentTabTableData = (
   cryptoLastInvestmentData: ILastInvestmentData[],
   stocksLastInvestmentData: ILastInvestmentData[],
   rareMetalsLastInvestmentData: ILastInvestmentData[],
-) => {
+): ILastInvestmentData[] => {
   switch (selectedTab) {
     case AssetType.Property:
       return propertiesLastInvestmentData;

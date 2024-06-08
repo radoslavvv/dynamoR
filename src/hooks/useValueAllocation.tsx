@@ -1,5 +1,6 @@
-import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
+
+import { RootState } from "../store/store";
 
 const useValueAllocation = () => {
   const propertiesInvestedValue: number = useSelector(

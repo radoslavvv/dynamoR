@@ -1,9 +1,11 @@
-import { GiHamburgerMenu } from "react-icons/gi";
-import Avatar from "../shared/Avatar";
 import { useSelector } from "react-redux";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+import Avatar from "../shared/Avatar";
+
 import { RootState } from "../../store/store";
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const sectionHeader: string = useSelector(
     (state: RootState) => state.pageSettings.sectionHeader,
   );

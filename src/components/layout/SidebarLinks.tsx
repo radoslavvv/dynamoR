@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+import { IoSettings } from "react-icons/io5";
 import { AiOutlineStock } from "react-icons/ai";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
-import { IoSettings } from "react-icons/io5";
-import ThemeChanger from "../shared/ThemeChanger";
-import routesConfig from "../routes/routes";
-import { Link } from "react-router-dom";
 
-const SidebarLinks = () => {
+import ThemeChanger from "../shared/ThemeChanger";
+
+import routesConfig from "../routes/routes";
+
+const SidebarLinks = (): JSX.Element => {
   return (
     <ul className="menu min-h-full bg-base-100 p-0 text-xl text-base-content lg:w-96">
       <h1 className="mb-5 flex select-none items-center justify-center gap-3 bg-base-300 p-5 text-center text-5xl font-bold">

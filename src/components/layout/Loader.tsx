@@ -1,4 +1,4 @@
-const Loader = () => {
+const Loader = (): JSX.Element => {
   return (
     <div className="flex h-[80vh] w-full flex-col items-center justify-center">
       <span className="loading loading-spinner loading-lg"></span>

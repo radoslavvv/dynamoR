@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import routesConfig from "../routes/routes";
+
 import useUserData from "../../hooks/useUserData";
+
+import routesConfig from "../routes/routes";
+
 import { DEFAULT_AVATAR_URL } from "../../utils/constants";
 
-const Avatar = () => {
+const Avatar = (): JSX.Element => {
   const { userData, fullName } = useUserData();
 
   return (

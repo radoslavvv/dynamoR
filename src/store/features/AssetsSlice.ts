@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { IInvestmentData } from "../../models/contracts/IInvestmentData";
+
 import {
   loadCryptoData,
   loadProperitesData,

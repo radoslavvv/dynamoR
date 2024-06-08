@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { IUserData } from "../../models/contracts/IUserData";
+
 import { loadUserData } from "../../api/client-api";
 
 interface IUserSliceState {

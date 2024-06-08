@@ -1,22 +1,24 @@
 import React from "react";
+
+import Investments from "../personalInvestments/Investments";
 import InvestedValues from "../personalInvestments/InvestedValues";
-import InvestmentsGrowthChart from "../personalInvestments/InvestmentsGrowthChart";
 import InvestmentsPieChart from "../personalInvestments/InvestmentsPieChart";
+import InvestmentsGrowthChart from "../personalInvestments/InvestmentsGrowthChart";
+
 import { useAppDispatch } from "../../store/store";
 import {
   setSectionHeader,
   setSidebarIsOpen,
 } from "../../store/features/PageSettingsSlice";
-import routesConfig from "../routes/routes";
-import Investments from "../personalInvestments/Investments";
 
-const PersonalInvestments = () => {
+import routesConfig from "../routes/routes";
+
+const PersonalInvestments = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     dispatch(setSectionHeader(routesConfig.personalInvestments.name));
     dispatch(setSidebarIsOpen(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

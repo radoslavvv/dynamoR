@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+
 import useValueGrowth from "../../hooks/useValueGrowth";
 
-const InvestmentsGrowthChart = () => {
+const InvestmentsGrowthChart = (): JSX.Element => {
   const { chartOptions } = useValueGrowth();
 
   return (

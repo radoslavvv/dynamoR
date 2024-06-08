@@ -1,15 +1,18 @@
-import { IInvestmentData } from "../models/contracts/IInvestmentData";
-import { AssetType } from "../models/enums/AssetType";
-import { RootState, useAppDispatch } from "../store/store";
+import React from "react";
 import { useSelector } from "react-redux";
-import { getAssetInvestedValue } from "../utils/assets-helper";
+
 import {
   setCryptoInvestedValue,
   setPropertiesInvestedValue,
   setRareMetalsInvestedValue,
   setStocksInvestedValue,
 } from "../store/features/AssetsCalculationsSlice";
-import React from "react";
+import { RootState, useAppDispatch } from "../store/store";
+
+import { IInvestmentData } from "../models/contracts/IInvestmentData";
+import { AssetType } from "../models/enums/AssetType";
+
+import { getAssetInvestedValue } from "../utils/assets-helper";
 
 const useInvestedValues = () => {
   const dispatch = useAppDispatch();

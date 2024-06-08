@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
+
 import { RootState, useAppDispatch } from "../../store/store";
 import { setSidebarIsOpen } from "../../store/features/PageSettingsSlice";
+
 import SidebarLinks from "./SidebarLinks";
 
 interface ISidebarProps {
   children: JSX.Element;
 }
 
-const Sidebar = (props: ISidebarProps) => {
+const Sidebar = (props: ISidebarProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const sidebarIsOpen: boolean = useSelector(

@@ -1,16 +1,19 @@
-import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
-import { RootState, useAppDispatch } from "../store/store";
-import { useSelector } from "react-redux";
-import { getOpenClosedPositionsCount } from "../utils/assets-helper";
-import { AssetType } from "../models/enums/AssetType";
-import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import React from "react";
+import { useSelector } from "react-redux";
+
 import {
   setCryptoOpenClosedPositions,
   setPropertiesOpenClosedPositions,
   setRareMetalsOpenClosedPositions,
   setStocksOpenClosedPositions,
 } from "../store/features/AssetsCalculationsSlice";
+import { RootState, useAppDispatch } from "../store/store";
+
+import { AssetType } from "../models/enums/AssetType";
+import { IInvestmentData } from "../models/contracts/IInvestmentData";
+import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
+
+import { getOpenClosedPositionsCount } from "../utils/assets-helper";
 
 const useOpenClosedPositions = () => {
   const dispatch = useAppDispatch();
