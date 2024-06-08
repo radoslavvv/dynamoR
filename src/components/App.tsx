@@ -9,6 +9,7 @@ import {
   fetchRareMetalsData,
   fetchStocksData,
 } from "../store/features/AssetsSlice";
+import { fetchUserData } from "../store/features/UserSlice";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ const App = () => {
       dispatch(fetchCryptoData()),
       dispatch(fetchRareMetalsData()),
       dispatch(fetchStocksData()),
+      dispatch(fetchUserData()),
     ]);
   };
 

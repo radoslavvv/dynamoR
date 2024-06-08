@@ -1,10 +1,22 @@
 import axios from "axios";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 // import { DYNAMO_API_URL } from "../utils/constants";
-import { crypto, properties, rareMaterials, stocks } from "../data";
+import { crypto, properties, rareMaterials, stocks, user } from "../data/data";
+import { IUserData } from "../models/contracts/IUserData";
 
 export const loadProperitesData = async (): Promise<IInvestmentData> => {
-  //   const url = `${DYNAMO_API_URL}/asset/properties`;
+  // const axiosInstance = axios.create({
+  //   baseURL: `${DYNAMO_API_URL}`,
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Content-Type": "application/json;charset=UTF-8", //this line solved cors
+  //   },
+  // });
+
+  // const res = axiosInstance.get("/asset/properties");
+
+  // console.log(res);
+  //   const url = ;
   //   return getDataFromURL(url);
 
   return properties;
@@ -28,6 +40,13 @@ export const loadStocksData = async (): Promise<IInvestmentData> => {
   //   return getDataFromURL(url);
 
   return stocks;
+};
+
+export const loadUserData = async (): Promise<IUserData> => {
+  //   const url = `${DYNAMO_API_URL}/asset/stocks`;
+  //   return getDataFromURL(url);
+
+  return user;
 };
 
 export const getDataFromURL = async (url: string): Promise<IInvestmentData> => {

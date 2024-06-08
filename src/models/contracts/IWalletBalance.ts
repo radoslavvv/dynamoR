@@ -1,7 +1,7 @@
 import { ITransaction } from "./ITransaction";
 
 export interface IWalletBalance {
-  name: string;
+  name?: string;
   address?: string;
   city?: string;
   iconUrl?: string;

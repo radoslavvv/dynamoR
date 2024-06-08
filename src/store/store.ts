@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { PageSettingsSlice } from "./features/PageSettingsSlice";
+
+import UserSlice from "./features/UserSlice";
 import AssetsSlice from "./features/AssetsSlice";
+import PageSettingsSlice from "./features/PageSettingsSlice";
 import AssetsCalculationsSlice from "./features/AssetsCalculationsSlice";
 
 const store = configureStore({
@@ -9,6 +11,7 @@ const store = configureStore({
     pageSettings: PageSettingsSlice.reducer,
     assests: AssetsSlice.reducer,
     assetsCalculations: AssetsCalculationsSlice.reducer,
+    user: UserSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
