@@ -2,8 +2,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Avatar from "../shared/Avatar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { Link } from "react-router-dom";
-import routesConfig from "../routes/routes";
 
 const Header = () => {
   const sectionHeader: string = useSelector(
@@ -11,7 +9,7 @@ const Header = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 z-10  bg-base-300">
+    <div className="navbar sticky top-0 z-10  flex-col bg-base-300 lg:flex-row">
       <div className="flex-none">
         <label htmlFor="my-drawer" className="btn btn-square btn-ghost text-xl">
           <GiHamburgerMenu />
