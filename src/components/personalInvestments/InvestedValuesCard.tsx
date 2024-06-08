@@ -14,11 +14,13 @@ const InvestedValuesCard = ({
   openClosedPositions,
 }: IInvestedValuesCardProps): JSX.Element => {
   return (
-    <div className="stat">
-      <div className="stat-title">{title}</div>
-      <div className="stat-value">${formatNumber(value)}</div>
-      <div className="stat-desc text-center">
-        {`${openClosedPositions.openCount} open / ${openClosedPositions.closedCount} closed`}
+    <div className="flex flex-col">
+      <div className="stat">
+        <div className="stat-title">{title}</div>
+        <div className="stat-value">${formatNumber(value)}</div>
+        <div className="stat-desc text-center">
+          {`${openClosedPositions.openCount} open / ${openClosedPositions.closedCount} closed`}
+        </div>
       </div>
     </div>
   );

@@ -18,36 +18,16 @@ import { getOpenClosedPositionsCount } from "../utils/assets-helper";
 const useOpenClosedPositions = () => {
   const dispatch = useAppDispatch();
 
-  const properties: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.properties,
-  );
-  const crypto: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.crypto,
-  );
-  const stocks: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.stocks,
-  );
-  const rareMetals: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.rareMetals,
+  const { properties, crypto, stocks, rareMetals } = useSelector(
+    (state: RootState) => state.assests,
   );
 
-  const propertiesOpenClosedPositions: IOpenClosedPositions = useSelector(
-    (state: RootState) =>
-      state.assetsCalculations.propertiesOpenClosedPositions,
-  );
-
-  const cryptoOpenClosedPositions: IOpenClosedPositions = useSelector(
-    (state: RootState) => state.assetsCalculations.cryptoOpenClosedPositions,
-  );
-
-  const rareMetalsOpenClosedPositions: IOpenClosedPositions = useSelector(
-    (state: RootState) =>
-      state.assetsCalculations.rareMetalsOpenClosedPositions,
-  );
-
-  const stocksOpenClosedPositions: IOpenClosedPositions = useSelector(
-    (state: RootState) => state.assetsCalculations.stocksOpenClosedPositions,
-  );
+  const {
+    propertiesOpenClosedPositions,
+    cryptoOpenClosedPositions,
+    rareMetalsOpenClosedPositions,
+    stocksOpenClosedPositions,
+  } = useSelector((state: RootState) => state.assetsCalculations);
 
   const totalOpenClosedPositions: IOpenClosedPositions = {
     openCount:
@@ -85,6 +65,7 @@ const useOpenClosedPositions = () => {
       crypto as IInvestmentData,
       AssetType.Crypto,
     );
+
     dispatch(setCryptoOpenClosedPositions(cryptoOpenClosedPositions));
   };
 

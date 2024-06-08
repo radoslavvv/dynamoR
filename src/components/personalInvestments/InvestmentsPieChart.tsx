@@ -4,7 +4,11 @@ import HighchartsReact from "highcharts-react-official";
 import useValueAllocation from "../../hooks/useValueAllocation";
 
 const InvestmentsPieChart = (): JSX.Element => {
-  const { chartOptions } = useValueAllocation();
+  const { chartOptions, investedValuesAreCalculated } = useValueAllocation();
+
+  if (!investedValuesAreCalculated) {
+    return <></>;
+  }
 
   return (
     <div className="flex-1 animate-slideLeft">

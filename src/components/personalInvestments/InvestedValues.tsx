@@ -4,13 +4,14 @@ import useInvestedValues from "../../hooks/useInvestedValues";
 import useOpenClosedPositions from "../../hooks/useOpenClosedPositions";
 
 const InvestedValues = (): JSX.Element => {
-  const [
+  const {
     propertiesInvestedValue,
     cryptoInvestedValue,
     rareMetalsInvestedValue,
     stocksInvestedValue,
     totalInvestedValue,
-  ] = useInvestedValues();
+    investedValuesAreCalculated,
+  } = useInvestedValues();
 
   const [
     propertiesOpenClosedPositions,
@@ -20,11 +21,15 @@ const InvestedValues = (): JSX.Element => {
     totalOpenClosedPositions,
   ] = useOpenClosedPositions();
 
+  if (!investedValuesAreCalculated) {
+    return <></>;
+  }
+
   return (
     <div className="animate-fadeIn flex-col">
       <h1 className="flex justify-start text-2xl font-bold">Invested Value:</h1>
 
-      <div className="mt-3 flex justify-start">
+      <div className="mt-3 flex animate-fadeIn justify-start">
         <div className="stats flex w-96 flex-col bg-base-200 p-5 text-center shadow-xl lg:w-auto lg:flex-row">
           <InvestedValuesCard
             title={"Total Invested Value"}

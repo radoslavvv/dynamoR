@@ -7,17 +7,12 @@ const useValueAllocation = () => {
     (state: RootState) => state.assetsCalculations.propertiesInvestedValue,
   );
 
-  const cryptoInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.cryptoInvestedValue,
-  );
-
-  const rareMetalsInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.rareMetalsInvestedValue,
-  );
-
-  const stocksInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.stocksInvestedValue,
-  );
+  const {
+    cryptoInvestedValue,
+    rareMetalsInvestedValue,
+    stocksInvestedValue,
+    investedValuesAreCalculated,
+  } = useSelector((state: RootState) => state.assetsCalculations);
 
   const totalInvestedValue =
     stocksInvestedValue +
@@ -117,6 +112,7 @@ const useValueAllocation = () => {
     rareMetalsPercentage,
     pieChartData,
     chartOptions,
+    investedValuesAreCalculated,
   };
 };
 

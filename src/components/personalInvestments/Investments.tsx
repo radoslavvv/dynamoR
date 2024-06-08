@@ -8,12 +8,13 @@ import useInvestments from "../../hooks/useInvestments";
 import { getInvestmentTabTableData } from "../../utils/assets-helper";
 
 const Investments = (): JSX.Element => {
-  const [
+  const {
     stocksLastInvestmentData,
     propertiesLastInvestmentData,
     rareMetalsLastInvestmentData,
     cryptoLastInvestmentData,
-  ] = useInvestments();
+    lastInvestmentDataIsCalculated,
+  } = useInvestments();
 
   const [selectedTab, setSelectedTab] = React.useState<AssetType>(
     AssetType.Property,
@@ -26,6 +27,10 @@ const Investments = (): JSX.Element => {
     stocksLastInvestmentData,
     rareMetalsLastInvestmentData,
   );
+
+  if (!lastInvestmentDataIsCalculated) {
+    return <></>;
+  }
 
   return (
     <div className="mb-5 w-full flex-1 animate-slideUp">
@@ -66,7 +71,7 @@ const Investments = (): JSX.Element => {
 
         <div className="flex flex-col gap-5">
           {tableData.map((c) => (
-            <InvestmentTableCard data={c} />
+            <InvestmentTableCard key={c.name} data={c} />
           ))}
         </div>
       </div>

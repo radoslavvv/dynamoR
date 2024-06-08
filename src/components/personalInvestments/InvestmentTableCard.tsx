@@ -12,7 +12,8 @@ interface IInvestmentTableCardProps {
 const InvestmentTableCard = ({
   data,
 }: IInvestmentTableCardProps): JSX.Element => {
-  const { chartOptions } = useMarketChartData(data);
+  const { chartOptions,  } = useMarketChartData(data);
+
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body flex flex-col-reverse lg:flex-col">

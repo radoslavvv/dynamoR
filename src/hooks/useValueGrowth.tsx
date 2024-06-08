@@ -7,6 +7,7 @@ import {
   setPropertiesValueByMonth,
   setRareMetalsValueByMonth,
   setStocksValueByMonth,
+  setValuesByMonthAreCalculated,
 } from "../store/features/AssetsCalculationsSlice";
 import { RootState, useAppDispatch } from "../store/store";
 
@@ -23,31 +24,17 @@ import { DATE_FORMAT } from "../utils/constants";
 const useValueGrowth = () => {
   const dispatch = useAppDispatch();
 
-  const properties: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.properties,
-  );
-  const crypto: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.crypto,
-  );
-  const stocks: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.stocks,
-  );
-  const rareMetals: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.rareMetals,
+  const { properties, crypto, stocks, rareMetals } = useSelector(
+    (state: RootState) => state.assests,
   );
 
-  const propertiesValueByMonth: number[] = useSelector(
-    (state: RootState) => state.assetsCalculations.propertiesValueByMonth,
-  );
-  const cryptoValueByMonth: number[] = useSelector(
-    (state: RootState) => state.assetsCalculations.cryptoValueByMonth,
-  );
-  const stocksValueByMonth: number[] = useSelector(
-    (state: RootState) => state.assetsCalculations.stocksValueByMonth,
-  );
-  const rareMetalsValueByMonth: number[] = useSelector(
-    (state: RootState) => state.assetsCalculations.rareMetalsValueByMonth,
-  );
+  const {
+    propertiesValueByMonth,
+    cryptoValueByMonth,
+    stocksValueByMonth,
+    rareMetalsValueByMonth,
+    valuesByMonthAreCalculated,
+  } = useSelector((state: RootState) => state.assetsCalculations);
 
   const themeType: ThemeType = useSelector(
     (state: RootState) => state.pageSettings.themeType,
@@ -80,6 +67,8 @@ const useValueGrowth = () => {
       AssetType.Stock,
     );
     dispatch(setStocksValueByMonth(stocksInvestmentValuePerMonth));
+
+    dispatch(setValuesByMonthAreCalculated(true));
   };
 
   const chartStartDate = moment(monthsLastDates[0], DATE_FORMAT).toDate();
@@ -216,6 +205,7 @@ const useValueGrowth = () => {
     rareMetalsValueByMonth,
     monthsLastDates,
     chartOptions,
+    valuesByMonthAreCalculated,
   };
 };
 

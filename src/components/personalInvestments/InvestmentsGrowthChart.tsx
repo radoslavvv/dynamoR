@@ -5,7 +5,11 @@ import HighchartsReact from "highcharts-react-official";
 import useValueGrowth from "../../hooks/useValueGrowth";
 
 const InvestmentsGrowthChart = (): JSX.Element => {
-  const { chartOptions } = useValueGrowth();
+  const { chartOptions, valuesByMonthAreCalculated } = useValueGrowth();
+
+  if (!valuesByMonthAreCalculated) {
+    return <></>;
+  }
 
   return (
     <div className="flex-1 animate-slideRight">

@@ -5,6 +5,10 @@ import { IOpenClosedPositions } from "../../models/contracts/IOpenClosedPosition
 import { ILastInvestmentData } from "../../models/contracts/ILastInvestmentData";
 
 interface IPageSettingsState {
+  investedValuesAreCalculated: boolean;
+  valuesByMonthAreCalculated: boolean;
+  lastInvestmentDataIsCalculated: boolean;
+
   propertiesInvestedValue: number;
   propertiesOpenClosedPositions: IOpenClosedPositions;
   propertiesValueByMonth: number[];
@@ -27,6 +31,10 @@ interface IPageSettingsState {
 }
 
 const initialState: IPageSettingsState = {
+  investedValuesAreCalculated: false,
+  valuesByMonthAreCalculated: false,
+  lastInvestmentDataIsCalculated: false,
+
   propertiesInvestedValue: 0,
   propertiesOpenClosedPositions: { openCount: 0, closedCount: 0 },
   propertiesValueByMonth: [],
@@ -52,6 +60,18 @@ export const AssetsCalculationsSlice = createSlice({
   name: "assetsCalculationsSlice",
   initialState,
   reducers: {
+    setInvestedValuesAreCalculated: (state, action: PayloadAction<boolean>) => {
+      state.investedValuesAreCalculated = action.payload;
+    },
+    setValuesByMonthAreCalculated: (state, action: PayloadAction<boolean>) => {
+      state.valuesByMonthAreCalculated = action.payload;
+    },
+    setLastInvestmentDataIsCalcualted: (
+      state,
+      action: PayloadAction<boolean>,
+    ) => {
+      state.lastInvestmentDataIsCalculated = action.payload;
+    },
     setPropertiesInvestedValue: (state, action: PayloadAction<number>) => {
       state.propertiesInvestedValue = action.payload;
     },
@@ -144,6 +164,9 @@ export const {
   setPropertiesLastInvestmentData,
   setRareMetalsLastInvestmentData,
   setStocksLastInvestmentData,
+  setInvestedValuesAreCalculated,
+  setValuesByMonthAreCalculated,
+  setLastInvestmentDataIsCalcualted,
 } = AssetsCalculationsSlice.actions;
 
 export default AssetsCalculationsSlice;

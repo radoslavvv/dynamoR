@@ -21,31 +21,17 @@ import { DATE_FORMAT } from "../utils/constants";
 const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
   const dispatch = useAppDispatch();
 
-  const properties: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.properties,
-  );
-  const crypto: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.crypto,
-  );
-  const stocks: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.stocks,
-  );
-  const rareMetals: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.rareMetals,
+  const { properties, crypto, stocks, rareMetals } = useSelector(
+    (state: RootState) => state.assests,
   );
 
-  const propertiesLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.propertiesLastInvestmentData,
-  );
-  const cryptoLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.cryptoLastInvestmentData,
-  );
-  const stocksLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.stocksLastInvestmentData,
-  );
-  const rareMetalsLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.rareMetalsLastInvestmentData,
-  );
+  const {
+    propertiesLastInvestmentData,
+    cryptoLastInvestmentData,
+    stocksLastInvestmentData,
+    rareMetalsLastInvestmentData,
+    lastInvestmentDataIsCalculated,
+  } = useSelector((state: RootState) => state.assetsCalculations);
 
   const themeType: ThemeType = useSelector(
     (state: RootState) => state.pageSettings.themeType,
@@ -185,6 +171,7 @@ const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
     rareMetalsLastInvestmentData,
     cryptoLastInvestmentData,
     chartOptions,
+    lastInvestmentDataIsCalculated,
   };
 };
 

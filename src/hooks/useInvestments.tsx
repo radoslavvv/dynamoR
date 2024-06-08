@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store/store";
 import {
   setCryptoLastInvestmentData,
+  setLastInvestmentDataIsCalcualted,
   setPropertiesLastInvestmentData,
   setRareMetalsLastInvestmentData,
   setStocksLastInvestmentData,
@@ -11,38 +12,23 @@ import {
 
 import { AssetType } from "../models/enums/AssetType";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
-import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
 
 import { getLastInvestmentsData } from "../utils/assets-helper";
 
 const useInvestments = () => {
   const dispatch = useAppDispatch();
 
-  const properties: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.properties,
-  );
-  const crypto: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.crypto,
-  );
-  const stocks: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.stocks,
-  );
-  const rareMetals: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.rareMetals,
+  const { properties, crypto, stocks, rareMetals } = useSelector(
+    (state: RootState) => state.assests,
   );
 
-  const propertiesLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.propertiesLastInvestmentData,
-  );
-  const cryptoLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.cryptoLastInvestmentData,
-  );
-  const stocksLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.stocksLastInvestmentData,
-  );
-  const rareMetalsLastInvestmentData: ILastInvestmentData[] = useSelector(
-    (state: RootState) => state.assetsCalculations.rareMetalsLastInvestmentData,
-  );
+  const {
+    propertiesLastInvestmentData,
+    cryptoLastInvestmentData,
+    stocksLastInvestmentData,
+    rareMetalsLastInvestmentData,
+    lastInvestmentDataIsCalculated,
+  } = useSelector((state: RootState) => state.assetsCalculations);
 
   const calculateLastInvestments = () => {
     const propertiesLastInvestmentData = getLastInvestmentsData(
@@ -68,6 +54,8 @@ const useInvestments = () => {
       AssetType.Stock,
     );
     dispatch(setStocksLastInvestmentData(stocksLastInvestmentData));
+
+    dispatch(setLastInvestmentDataIsCalcualted(true));
   };
 
   React.useEffect(() => {
@@ -76,12 +64,13 @@ const useInvestments = () => {
     }
   }, [properties, crypto, stocks, rareMetals]);
 
-  return [
+  return {
     stocksLastInvestmentData,
     propertiesLastInvestmentData,
     rareMetalsLastInvestmentData,
     cryptoLastInvestmentData,
-  ];
+    lastInvestmentDataIsCalculated,
+  };
 };
 
 export default useInvestments;

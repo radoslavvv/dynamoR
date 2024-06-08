@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import {
   setCryptoInvestedValue,
+  setInvestedValuesAreCalculated,
   setPropertiesInvestedValue,
   setRareMetalsInvestedValue,
   setStocksInvestedValue,
@@ -17,31 +18,17 @@ import { getAssetInvestedValue } from "../utils/assets-helper";
 const useInvestedValues = () => {
   const dispatch = useAppDispatch();
 
-  const properties: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.properties,
-  );
-  const crypto: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.crypto,
-  );
-  const stocks: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.stocks,
-  );
-  const rareMetals: IInvestmentData | null = useSelector(
-    (state: RootState) => state.assests.rareMetals,
+  const { properties, crypto, stocks, rareMetals } = useSelector(
+    (state: RootState) => state.assests,
   );
 
-  const propertiesInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.propertiesInvestedValue,
-  );
-  const cryptoInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.cryptoInvestedValue,
-  );
-  const rareMetalsInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.rareMetalsInvestedValue,
-  );
-  const stocksInvestedValue: number = useSelector(
-    (state: RootState) => state.assetsCalculations.stocksInvestedValue,
-  );
+  const {
+    propertiesInvestedValue,
+    cryptoInvestedValue,
+    rareMetalsInvestedValue,
+    stocksInvestedValue,
+    investedValuesAreCalculated,
+  } = useSelector((state: RootState) => state.assetsCalculations);
 
   const totalInvestedValue =
     stocksInvestedValue +
@@ -73,6 +60,8 @@ const useInvestedValues = () => {
       AssetType.RareMetal,
     );
     dispatch(setRareMetalsInvestedValue(rareMetalsInvestedValue));
+
+    dispatch(setInvestedValuesAreCalculated(true));
   };
 
   React.useEffect(() => {
@@ -81,13 +70,14 @@ const useInvestedValues = () => {
     }
   }, [properties, crypto, stocks, rareMetals]);
 
-  return [
+  return {
     propertiesInvestedValue,
     cryptoInvestedValue,
     rareMetalsInvestedValue,
     stocksInvestedValue,
     totalInvestedValue,
-  ];
+    investedValuesAreCalculated,
+  };
 };
 
 export default useInvestedValues;
