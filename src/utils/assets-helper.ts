@@ -1,3 +1,4 @@
+import moment from "moment";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import { IMarketPrice } from "../models/contracts/IMarketPrice";
 import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
@@ -96,4 +97,80 @@ export const getOpenClosedPositionsCount = (
   }
 
   return openClosedPositionsCount;
+};
+
+export const getMonthsLastDates = (investmentData: IInvestmentData) => {
+  const lastDates = [];
+
+  const seriesPrices = investmentData.marketPrices[0].seriesPrice;
+  const dates = seriesPrices.map((s) => s.date);
+  for (let i = 0; i < dates.length; i++) {
+    const currentDate = dates[i];
+
+    const [, currentMonth] = currentDate.split("-").map(Number);
+
+    if (
+      i === dates.length - 1 ||
+      dates[i + 1].split("-")[1] !== String(currentMonth).padStart(2, "0")
+    ) {
+      lastDates.push(currentDate);
+    }
+  }
+
+  return lastDates;
+};
+
+export const getInvestmentValueByMonths = (
+  investmentData: IInvestmentData,
+  assetType: AssetType,
+) => {
+  const investmentValueByMonths: number[] = [];
+
+  const monthsLastDates = getMonthsLastDates(investmentData);
+  for (let i = 0; i < monthsLastDates.length; i++) {
+    const currentMonthLastDate = monthsLastDates[i];
+
+    let currentMonthInvestmentValue = 0;
+    for (let j = 0; j < investmentData.walletBalance.length; j++) {
+      const currentAsset = investmentData.walletBalance[j];
+
+      const transactionsBeforeLastDate = currentAsset.transactions.filter(
+        (t) =>
+          moment(t.date, "DD/MM/YYYY") <
+          moment(currentMonthLastDate, "DD/MM/YYYY"),
+      );
+
+      if (transactionsBeforeLastDate.length === 0) {
+        continue;
+      }
+
+      const marketDataForAsset = investmentData.marketPrices.filter((mp) => {
+        if (assetType === AssetType.Property) {
+          return mp.address === currentAsset.address;
+        } else {
+          return mp.name === currentAsset.name;
+        }
+      })[0];
+
+      if (!marketDataForAsset) {
+        continue;
+      }
+
+      const lastMarketPrice = marketDataForAsset.seriesPrice.filter(
+        (c) => c.date === currentMonthLastDate,
+      )[0];
+
+      if (!lastMarketPrice) {
+        continue;
+      }
+
+      currentMonthInvestmentValue +=
+        transactionsBeforeLastDate[transactionsBeforeLastDate.length - 1]
+          .balance * lastMarketPrice.value;
+    }
+
+    investmentValueByMonths.push(Math.round(currentMonthInvestmentValue));
+  }
+
+  return investmentValueByMonths;
 };

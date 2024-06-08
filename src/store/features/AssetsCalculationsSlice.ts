@@ -5,29 +5,37 @@ import { IOpenClosedPositions } from "../../models/contracts/IOpenClosedPosition
 interface IPageSettingsState {
   propertiesInvestedValue: number;
   propertiesOpenClosedPositions: IOpenClosedPositions;
+  propertiesValueByMonth: number[];
 
   cryptoInvestedValue: number;
   cryptoOpenClosedPositions: IOpenClosedPositions;
+  cryptoValueByMonth: number[];
 
   stocksInvestedValue: number;
   stocksOpenClosedPositions: IOpenClosedPositions;
+  stocksValueByMonth: number[];
 
   rareMetalsInvestedValue: number;
   rareMetalsOpenClosedPositions: IOpenClosedPositions;
+  rareMetalsValueByMonth: number[];
 }
 
 const initialState: IPageSettingsState = {
   propertiesInvestedValue: 0,
   propertiesOpenClosedPositions: { openCount: 0, closedCount: 0 },
+  propertiesValueByMonth: [],
 
   cryptoInvestedValue: 0,
   cryptoOpenClosedPositions: { openCount: 0, closedCount: 0 },
+  cryptoValueByMonth: [],
 
   stocksInvestedValue: 0,
   stocksOpenClosedPositions: { openCount: 0, closedCount: 0 },
+  stocksValueByMonth: [],
 
   rareMetalsInvestedValue: 0,
   rareMetalsOpenClosedPositions: { openCount: 0, closedCount: 0 },
+  rareMetalsValueByMonth: [],
 };
 
 export const AssetsCalculationsSlice = createSlice({
@@ -43,6 +51,9 @@ export const AssetsCalculationsSlice = createSlice({
     ) => {
       state.propertiesOpenClosedPositions = { ...action.payload };
     },
+    setPropertiesValueByMonth: (state, action: PayloadAction<number[]>) => {
+      state.propertiesValueByMonth = [...action.payload];
+    },
     setCryptoInvestedValue: (state, action: PayloadAction<number>) => {
       state.cryptoInvestedValue = action.payload;
     },
@@ -51,6 +62,9 @@ export const AssetsCalculationsSlice = createSlice({
       action: PayloadAction<IOpenClosedPositions>,
     ) => {
       state.cryptoOpenClosedPositions = { ...action.payload };
+    },
+    setCryptoValueByMonth: (state, action: PayloadAction<number[]>) => {
+      state.cryptoValueByMonth = [...action.payload];
     },
     setStocksInvestedValue: (state, action: PayloadAction<number>) => {
       state.stocksInvestedValue = action.payload;
@@ -61,6 +75,9 @@ export const AssetsCalculationsSlice = createSlice({
     ) => {
       state.stocksOpenClosedPositions = { ...action.payload };
     },
+    setStocksValueByMonth: (state, action: PayloadAction<number[]>) => {
+      state.stocksValueByMonth = [...action.payload];
+    },
     setRareMetalsInvestedValue: (state, action: PayloadAction<number>) => {
       state.rareMetalsInvestedValue = action.payload;
     },
@@ -69,6 +86,9 @@ export const AssetsCalculationsSlice = createSlice({
       action: PayloadAction<IOpenClosedPositions>,
     ) => {
       state.rareMetalsOpenClosedPositions = { ...action.payload };
+    },
+    setRareMetalsValueByMonth: (state, action: PayloadAction<number[]>) => {
+      state.rareMetalsValueByMonth = [...action.payload];
     },
   },
 });
@@ -82,6 +102,10 @@ export const {
   setPropertiesOpenClosedPositions,
   setRareMetalsOpenClosedPositions,
   setStocksOpenClosedPositions,
+  setCryptoValueByMonth,
+  setPropertiesValueByMonth,
+  setRareMetalsValueByMonth,
+  setStocksValueByMonth,
 } = AssetsCalculationsSlice.actions;
 
 export default AssetsCalculationsSlice;
