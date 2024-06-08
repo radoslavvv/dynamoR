@@ -98,7 +98,7 @@ const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
     },
     yAxis: {
       title: {
-        text: "Investment Value",
+        text: "Value",
         style: {
           color: color,
         },

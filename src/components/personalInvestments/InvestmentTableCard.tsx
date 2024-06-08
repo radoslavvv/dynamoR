@@ -15,7 +15,7 @@ const InvestmentTableCard = ({
   const { chartOptions } = useMarketChartData(data);
   return (
     <div className="card w-full bg-base-100 shadow-xl">
-      <div className="card-body">
+      <div className="card-body flex flex-col-reverse lg:flex-col">
         <div className="flex flex-col items-start gap-5  lg:flex-row">
           <p className="flex flex-1 flex-col">
             <span className="text-gray-400">Name:</span> {data.name}
