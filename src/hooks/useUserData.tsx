@@ -9,9 +9,9 @@ const useUserData = () => {
     (state: RootState) => state.user.userData,
   );
 
-  const fullName: string = userData
+  const fullName: string | null = userData
     ? `${userData?.firstName} ${userData?.lastName}`
-    : "user";
+    : null;
 
   return { userData, fullName };
 };

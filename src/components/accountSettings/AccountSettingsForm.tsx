@@ -4,7 +4,7 @@ const AccountSettingsForm = () => {
   const { userData } = useUserData();
 
   return (
-    <div className="card w-96 bg-base-200 shadow-xl">
+    <div className="card w-96 animate-slideUp bg-base-200 shadow-xl">
       <div className="card-body">
         <label className="form-control w-full max-w-xs">
           <div className="label">

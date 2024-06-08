@@ -2,6 +2,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Avatar from "../shared/Avatar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { Link } from "react-router-dom";
+import routesConfig from "../routes/routes";
 
 const Header = () => {
   const sectionHeader: string = useSelector(

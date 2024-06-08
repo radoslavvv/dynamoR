@@ -10,19 +10,22 @@ import {
   fetchStocksData,
 } from "../store/features/AssetsSlice";
 import { fetchUserData } from "../store/features/UserSlice";
+import Loader from "./layout/Loader";
 
 const App = () => {
   const dispatch = useAppDispatch();
-  // const [properties, crypto, stocks, rareMetals] = useAssets();
+  const [dataIsLoaded, setDataIsLoaded] = React.useState<boolean>(false);
 
   const loadData = async () => {
-    Promise.all([
+    await Promise.all([
       dispatch(fetchPropertiesData()),
       dispatch(fetchCryptoData()),
       dispatch(fetchRareMetalsData()),
       dispatch(fetchStocksData()),
       dispatch(fetchUserData()),
     ]);
+
+    setDataIsLoaded(true);
   };
 
   React.useEffect(() => {
@@ -32,9 +35,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <Sidebar>
-        <Main />
-      </Sidebar>
+      <Sidebar>{dataIsLoaded ? <Main /> : <Loader />}</Sidebar>
     </>
   );
 };

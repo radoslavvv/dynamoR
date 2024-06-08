@@ -8,6 +8,7 @@ import {
   setSidebarIsOpen,
 } from "../../store/features/PageSettingsSlice";
 import routesConfig from "../routes/routes";
+import Investments from "../personalInvestments/Investments";
 
 const PersonalInvestments = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const PersonalInvestments = () => {
 
   return (
     <>
-      <div className="y-5 flex flex-1 flex-col items-center justify-center gap-10 px-5 lg:px-20">
+      <div className="flex flex-col items-center justify-center gap-10 px-5 lg:px-20">
         <div className="mt-5 flex justify-center">
           <InvestedValues />
         </div>
@@ -28,6 +29,7 @@ const PersonalInvestments = () => {
           <InvestmentsPieChart />
           <InvestmentsGrowthChart />
         </div>
+        <Investments />
       </div>
       <div></div>
     </>

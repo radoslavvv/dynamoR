@@ -14,6 +14,8 @@ import {
   setStocksValueByMonth,
 } from "../store/features/AssetsCalculationsSlice";
 import moment from "moment";
+import { ThemeType } from "../models/enums/ThemeType";
+import { DATE_FORMAT } from "../utils/constants";
 
 const useValueGrowth = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +44,10 @@ const useValueGrowth = () => {
   );
   const rareMetalsValueByMonth: number[] = useSelector(
     (state: RootState) => state.assetsCalculations.rareMetalsValueByMonth,
+  );
+
+  const themeType: ThemeType = useSelector(
+    (state: RootState) => state.pageSettings.themeType,
   );
 
   const monthsLastDates = properties ? getMonthsLastDates(properties) : [];
@@ -73,15 +79,15 @@ const useValueGrowth = () => {
     dispatch(setStocksValueByMonth(stocksInvestmentValuePerMonth));
   };
 
-  const chartStartDate = moment(monthsLastDates[0], "DD/MM/YYYY").toDate();
+  const chartStartDate = moment(monthsLastDates[0], DATE_FORMAT).toDate();
   const chartEndDate = moment(
     monthsLastDates[monthsLastDates.length - 1],
-    "DD/MM/YYYY",
+    DATE_FORMAT,
   )
     .add(1, "month")
     .toDate();
 
-  const color = "white";
+  const color = themeType === ThemeType.Dark ? "white" : "black";
 
   const chartOptions = {
     chart: {
@@ -128,6 +134,18 @@ const useValueGrowth = () => {
       type: "datetime",
       tickInterval: 24 * 3600 * 1000 * 30,
     },
+    // tooltip: {
+    //   formatter: function () {
+    //     return (
+    //       "The value for <b>" +
+    //       this.x +
+    //       "</b> is <b>" +
+    //       this.y +
+    //       "</b>, in series " +
+    //       this.series.name
+    //     );
+    //   },
+    // },
     legend: {
       layout: "vertical",
       align: "right",

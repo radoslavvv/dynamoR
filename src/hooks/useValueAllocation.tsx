@@ -47,12 +47,12 @@ const useValueAllocation = () => {
       y: cryptoPercentage,
     },
     {
-      name: "Rare Materials",
-      y: rareMetalsPercentage,
-    },
-    {
       name: "Stocks",
       y: stocksPercentage,
+    },
+    {
+      name: "Rare Metals",
+      y: rareMetalsPercentage,
     },
   ];
 
