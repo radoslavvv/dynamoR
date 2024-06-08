@@ -7,6 +7,7 @@ import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
 import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
 
 import { DATE_FORMAT } from "./constants";
+import { ISeriesPrice } from "../models/contracts/ISeriesPrice";
 
 export const formatNumber = (number: number): string => {
   const formatter = new Intl.NumberFormat("en-US", {
@@ -67,6 +68,26 @@ export const getLastAssetPrice = (
   }
 
   return marketPrice.seriesPrice[marketPrice.seriesPrice.length - 1].value;
+};
+
+export const getAssetSeriesPrices = (
+  marketPrices: IMarketPrice[],
+  assetType: AssetType,
+  filterValue: string,
+): ISeriesPrice[] => {
+  const marketPrice = marketPrices.filter((mp) => {
+    if (assetType === AssetType.Property) {
+      return mp.address === filterValue;
+    } else {
+      return mp.name === filterValue;
+    }
+  })[0];
+
+  if (!marketPrice) {
+    return [];
+  }
+
+  return marketPrice.seriesPrice;
 };
 
 export const getOpenClosedPositionsCount = (
@@ -211,6 +232,12 @@ export const getLastInvestmentsData = (
         ? lastTransaction.amount * marketPrice
         : lastTransaction.balance * marketPrice;
 
+    const seriesPrices = getAssetSeriesPrices(
+      investmentData.marketPrices,
+      assetType,
+      marketPriceFilterValue,
+    );
+
     lastInvestmentData.push({
       name: (currentAsset.address || currentAsset.name)!,
       balance: balance,
@@ -220,6 +247,7 @@ export const getLastInvestmentsData = (
           ? lastTransaction.amount > 0
           : lastTransaction.open!,
       marketPrice: marketPrice || 0,
+      seriesPrice: seriesPrices,
     });
   }
 

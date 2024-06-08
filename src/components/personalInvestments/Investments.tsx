@@ -33,7 +33,7 @@ const Investments = (): JSX.Element => {
         Investments:
       </h1>
       <div className="rounded-3xl bg-base-300 p-5 shadow-xl">
-        <div role="tablist" className="tabs tabs-bordered">
+        <div role="tablist" className="tabs tabs-bordered mb-5">
           <a
             role="tab"
             className={`tab ${selectedTab === AssetType.Property ? "tab-active" : ""}`}

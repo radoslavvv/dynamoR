@@ -1,6 +1,10 @@
+import HighchartsReact from "highcharts-react-official";
+
 import { ILastInvestmentData } from "../../models/contracts/ILastInvestmentData";
 
 import { formatNumber } from "../../utils/assets-helper";
+import Highcharts from "highcharts";
+import useMarketChartData from "../../hooks/useMarketChartData";
 
 interface IInvestmentTableCardProps {
   data: ILastInvestmentData;
@@ -8,6 +12,7 @@ interface IInvestmentTableCardProps {
 const InvestmentTableCard = ({
   data,
 }: IInvestmentTableCardProps): JSX.Element => {
+  const { chartOptions } = useMarketChartData(data);
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <div className="card-body">
@@ -43,6 +48,9 @@ const InvestmentTableCard = ({
               Open
             </button>
           </p>
+        </div>
+        <div className="mt-5 rounded-xl bg-base-300 p-2">
+          <HighchartsReact highcharts={Highcharts} options={chartOptions} />
         </div>
       </div>
     </div>
