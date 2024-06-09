@@ -1,6 +1,8 @@
 import React from "react";
+
 import useAccountSettingsForm from "../../hooks/useAccountSettingsForm";
 import useUserData from "../../hooks/useUserData";
+
 import { IUserData } from "../../models/contracts/IUserData";
 
 const AccountSettingsForm = (): JSX.Element => {

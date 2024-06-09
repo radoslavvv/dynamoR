@@ -1,20 +1,20 @@
-import { useSelector } from "react-redux";
-
-import { RootState, useAppDispatch } from "../store/store";
-
-import { AssetType } from "../models/enums/AssetType";
-
-import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import { ThemeType } from "../models/enums/ThemeType";
-import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
-import { ITransaction } from "../models/contracts/ITransaction";
+import { useSelector } from "react-redux";
+import withReactContent from "sweetalert2-react-content";
+
 import {
   addCryptoTransaction,
   addPropertiesTransaction,
   addRareMetalsTransaction,
   addStocksTransaction,
 } from "../store/features/AssetsSlice";
+
+import { RootState, useAppDispatch } from "../store/store";
+
+import { AssetType } from "../models/enums/AssetType";
+import { ThemeType } from "../models/enums/ThemeType";
+import { ITransaction } from "../models/contracts/ITransaction";
+import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
 
 const useInvestmentsOpenClose = (data: ILastInvestmentData) => {
   const dispatch = useAppDispatch();

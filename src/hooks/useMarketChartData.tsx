@@ -15,8 +15,8 @@ import { ThemeType } from "../models/enums/ThemeType";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
 
-import { getLastInvestmentsData } from "../utils/assets-helper";
 import { DATE_FORMAT } from "../utils/constants";
+import { getLastInvestmentsData } from "../utils/assets-helper";
 
 const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
-// import { DYNAMO_API_URL } from "../utils/constants";
 import { crypto, properties, rareMaterials, stocks, user } from "../data/data";
 import { IUserData } from "../models/contracts/IUserData";
 import { DYNAMO_API_URL } from "../utils/constants";

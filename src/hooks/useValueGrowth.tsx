@@ -126,18 +126,6 @@ const useValueGrowth = () => {
       type: "datetime",
       tickInterval: 24 * 3600 * 1000 * 30,
     },
-    // tooltip: {
-    //   formatter: function () {
-    //     return (
-    //       "The value for <b>" +
-    //       this.x +
-    //       "</b> is <b>" +
-    //       this.y +
-    //       "</b>, in series " +
-    //       this.series.name
-    //     );
-    //   },
-    // },
     legend: {
       layout: "vertical",
       align: "right",

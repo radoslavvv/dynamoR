@@ -34,10 +34,16 @@ const App = (): JSX.Element => {
     loadData();
   }, []);
 
+  if (!dataIsLoaded) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Header />
-      <Sidebar>{dataIsLoaded ? <Main /> : <Loader />}</Sidebar>
+      <Sidebar>
+        <Main />
+      </Sidebar>
     </>
   );
 };

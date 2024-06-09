@@ -1,9 +1,10 @@
+import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 import { ILastInvestmentData } from "../../models/contracts/ILastInvestmentData";
 
 import { formatNumber } from "../../utils/assets-helper";
-import Highcharts from "highcharts";
+
 import useMarketChartData from "../../hooks/useMarketChartData";
 import useInvestmentsOpenClose from "../../hooks/useInvestmentsOpenClose";
 

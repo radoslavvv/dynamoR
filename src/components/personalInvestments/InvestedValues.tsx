@@ -2,6 +2,7 @@ import InvestedValuesCard from "./InvestedValuesCard";
 
 import useInvestedValues from "../../hooks/useInvestedValues";
 import useOpenClosedPositions from "../../hooks/useOpenClosedPositions";
+
 import { CHART_LABELS } from "../../utils/constants";
 
 const InvestedValues = (): JSX.Element => {

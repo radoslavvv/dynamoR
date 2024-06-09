@@ -5,6 +5,7 @@ import InvestmentTableCard from "./InvestmentTableCard";
 import { AssetType } from "../../models/enums/AssetType";
 
 import { getInvestmentTabTableData } from "../../utils/assets-helper";
+
 import useInvestmentsManagement from "../../hooks/useInvestmentsManagement";
 
 const InvestmentsManagement = (): JSX.Element => {

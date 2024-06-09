@@ -5,8 +5,9 @@ import withReactContent from "sweetalert2-react-content";
 import { RootState } from "../store/store";
 
 import { ThemeType } from "../models/enums/ThemeType";
-import { submitUserAccountSettings } from "../api/client-api";
 import { IUserData } from "../models/contracts/IUserData";
+
+import { submitUserAccountSettings } from "../api/client-api";
 
 const useAccountSettingsForm = () => {
   const { themeType } = useSelector((state: RootState) => state.pageSettings);

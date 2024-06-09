@@ -1,15 +1,15 @@
 import moment from "moment";
 
 import { AssetType } from "../models/enums/AssetType";
+import { ITransaction } from "../models/contracts/ITransaction";
 import { IMarketPrice } from "../models/contracts/IMarketPrice";
+import { ISeriesPrice } from "../models/contracts/ISeriesPrice";
+import { IWalletBalance } from "../models/contracts/IWalletBalance";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
 import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
 
 import { DATE_FORMAT } from "./constants";
-import { ISeriesPrice } from "../models/contracts/ISeriesPrice";
-import { IWalletBalance } from "../models/contracts/IWalletBalance";
-import { ITransaction } from "../models/contracts/ITransaction";
 
 export const formatNumber = (number: number): string => {
   const formatter = new Intl.NumberFormat("en-US", {
@@ -58,11 +58,9 @@ export const getLastAssetPrice = (
   filterValue: string,
 ): number | null => {
   const marketPrice = marketPrices.filter((mp) => {
-    if (assetType === AssetType.Property) {
-      return mp.address === filterValue;
-    } else {
-      return mp.name === filterValue;
-    }
+    return assetType === AssetType.Property
+      ? mp.address === filterValue
+      : mp.name === filterValue;
   })[0];
 
   if (!marketPrice) {
@@ -96,11 +94,9 @@ export const getAssetSeriesPrices = (
   filterValue: string,
 ): ISeriesPrice[] => {
   const marketPrice = marketPrices.filter((mp) => {
-    if (assetType === AssetType.Property) {
-      return mp.address === filterValue;
-    } else {
-      return mp.name === filterValue;
-    }
+    return assetType === AssetType.Property
+      ? mp.address === filterValue
+      : mp.name === filterValue;
   })[0];
 
   if (!marketPrice) {
@@ -122,19 +118,11 @@ export const getOpenClosedPositionsCount = (
   for (let i = 0; i < investmentData.walletBalance.length; i++) {
     const currentAsset = investmentData.walletBalance[i];
     const openPositions = currentAsset.transactions.filter((t) => {
-      if (assetType === AssetType.Property) {
-        return t.amount > 0;
-      } else {
-        return t.open;
-      }
+      return assetType === AssetType.Property ? t.amount > 0 : t.open;
     });
 
     const closedPositions = currentAsset.transactions.filter((t) => {
-      if (assetType === AssetType.Property) {
-        return t.amount === 0;
-      } else {
-        return !t.open;
-      }
+      return assetType === AssetType.Property ? t.amount === 0 : !t.open;
     });
 
     openClosedPositionsCount.openCount += openPositions.length;
@@ -192,11 +180,9 @@ export const getInvestmentValueByMonths = (
       }
 
       const marketDataForAsset = investmentData.marketPrices.filter((mp) => {
-        if (assetType === AssetType.Property) {
-          return mp.address === currentAsset.address;
-        } else {
-          return mp.name === currentAsset.name;
-        }
+        return assetType === AssetType.Property
+          ? mp.address === currentAsset.address
+          : mp.name === currentAsset.name;
       })[0];
 
       if (!marketDataForAsset) {
@@ -258,12 +244,7 @@ export const getLastInvestmentsData = (
     lastInvestmentData.push({
       name: (currentAsset.address || currentAsset.name)!,
       balance: lastTransaction.balance,
-      // amount: lastTransaction.amount,
       value: value,
-      // position:
-      // assetType === AssetType.Property
-      //   ? lastTransaction.amount > 0
-      //   : lastTransaction.open!,
       marketPrice: marketPrice || 0,
       seriesPrice: seriesPrices,
       assetType: assetType,

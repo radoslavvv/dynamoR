@@ -1,5 +1,7 @@
-import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
+
+import { RootState } from "../store/store";
+
 import { IUserData } from "../models/contracts/IUserData";
 
 const useUserData = () => {

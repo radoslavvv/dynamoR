@@ -109,21 +109,6 @@ export const AssetsSlice = createSlice({
           ...asset.transactions,
           action.payload.transaction,
         ];
-
-        // switch (action.payload.assetType) {
-        //   case AssetType.Crypto:
-        //     state.crypto = assets;
-        //     break;
-        //   case AssetType.Property:
-        //     assets = state.properties;
-        //     break;
-        //   case AssetType.RareMetal:
-        //     assets = state.rareMetals;
-        //     break;
-        //   case AssetType.Stock:
-        //     assets = state.stocks;
-        //     break;
-        // }
       }
     },
     addCryptoTransaction: (

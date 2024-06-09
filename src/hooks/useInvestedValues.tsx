@@ -10,8 +10,8 @@ import {
 } from "../store/features/AssetsCalculationsSlice";
 import { RootState, useAppDispatch } from "../store/store";
 
-import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import { AssetType } from "../models/enums/AssetType";
+import { IInvestmentData } from "../models/contracts/IInvestmentData";
 
 import { getAssetInvestedValue } from "../utils/assets-helper";
 
