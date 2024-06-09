@@ -10,11 +10,11 @@ import useInvestmentsManagement from "../../hooks/useInvestmentsManagement";
 
 const InvestmentsManagement = (): JSX.Element => {
   const {
-    stocksLastInvestmentData,
-    propertiesLastInvestmentData,
-    rareMetalsLastInvestmentData,
-    cryptoLastInvestmentData,
-    lastInvestmentDataIsCalculated,
+    stocksInvestmentTableData,
+    propertiesInvestmentTableData,
+    rareMetalsInvestmentTableData,
+    cryptoInvestmentTableData,
+    investmentTableDataIsCalculated,
   } = useInvestmentsManagement();
 
   const [selectedTab, setSelectedTab] = React.useState<AssetType>(
@@ -23,13 +23,13 @@ const InvestmentsManagement = (): JSX.Element => {
 
   const tableData = getInvestmentTabTableData(
     selectedTab,
-    propertiesLastInvestmentData,
-    cryptoLastInvestmentData,
-    stocksLastInvestmentData,
-    rareMetalsLastInvestmentData,
+    propertiesInvestmentTableData,
+    cryptoInvestmentTableData,
+    stocksInvestmentTableData,
+    rareMetalsInvestmentTableData,
   );
 
-  if (!lastInvestmentDataIsCalculated) {
+  if (!investmentTableDataIsCalculated) {
     return <></>;
   }
 

@@ -1,7 +1,7 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import { ILastInvestmentData } from "../../models/contracts/ILastInvestmentData";
+import { IInvestmentTableData } from "../../models/contracts/IInvestmentTableData";
 
 import { formatNumber } from "../../utils/assets-helper";
 
@@ -9,7 +9,7 @@ import useMarketChartData from "../../hooks/useMarketChartData";
 import useInvestmentsOpenClose from "../../hooks/useInvestmentsOpenClose";
 
 interface IInvestmentTableCardProps {
-  data: ILastInvestmentData;
+  data: IInvestmentTableData;
 }
 const InvestmentTableCard = ({
   data,

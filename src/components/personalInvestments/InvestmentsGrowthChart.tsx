@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 

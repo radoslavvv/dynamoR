@@ -16,8 +16,8 @@ import { ThemeType } from "../models/enums/ThemeType";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 
 import {
-  getInvestmentValueByMonths,
-  getMonthsLastDates,
+  getAssetInvestmentValueByMonths,
+  getMarketDataMonthsLastDates,
 } from "../utils/assets-helper";
 import { CHART_COLORS, CHART_LABELS, DATE_FORMAT } from "../utils/constants";
 
@@ -40,29 +40,31 @@ const useValueGrowth = () => {
     (state: RootState) => state.pageSettings.themeType,
   );
 
-  const monthsLastDates = properties ? getMonthsLastDates(properties) : [];
+  const monthsLastDates = properties
+    ? getMarketDataMonthsLastDates(properties)
+    : [];
 
   const calculateInvestmentValuePerMonth = () => {
-    const propertiesInvestmentValuePerMonth = getInvestmentValueByMonths(
+    const propertiesInvestmentValuePerMonth = getAssetInvestmentValueByMonths(
       properties as IInvestmentData,
       AssetType.Property,
     );
 
     dispatch(setPropertiesValueByMonth(propertiesInvestmentValuePerMonth));
 
-    const cryptoInvestmentValuePerMonth = getInvestmentValueByMonths(
+    const cryptoInvestmentValuePerMonth = getAssetInvestmentValueByMonths(
       crypto as IInvestmentData,
       AssetType.Crypto,
     );
     dispatch(setCryptoValueByMonth(cryptoInvestmentValuePerMonth));
 
-    const rareMetalsInvestmentValuePerMonth = getInvestmentValueByMonths(
+    const rareMetalsInvestmentValuePerMonth = getAssetInvestmentValueByMonths(
       rareMetals as IInvestmentData,
       AssetType.RareMetal,
     );
     dispatch(setRareMetalsValueByMonth(rareMetalsInvestmentValuePerMonth));
 
-    const stocksInvestmentValuePerMonth = getInvestmentValueByMonths(
+    const stocksInvestmentValuePerMonth = getAssetInvestmentValueByMonths(
       stocks as IInvestmentData,
       AssetType.Stock,
     );

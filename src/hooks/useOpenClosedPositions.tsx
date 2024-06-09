@@ -13,7 +13,7 @@ import { AssetType } from "../models/enums/AssetType";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
 
-import { getOpenClosedPositionsCount } from "../utils/assets-helper";
+import { getAssetOpenClosedPositionsCount } from "../utils/assets-helper";
 
 const useOpenClosedPositions = () => {
   const dispatch = useAppDispatch();
@@ -43,25 +43,25 @@ const useOpenClosedPositions = () => {
   };
 
   const calculateOpenClosedPositions = () => {
-    const propertiesOpenClosedPositions = getOpenClosedPositionsCount(
+    const propertiesOpenClosedPositions = getAssetOpenClosedPositionsCount(
       properties as IInvestmentData,
       AssetType.Property,
     );
     dispatch(setPropertiesOpenClosedPositions(propertiesOpenClosedPositions));
 
-    const stocksOpenClosedPositions = getOpenClosedPositionsCount(
+    const stocksOpenClosedPositions = getAssetOpenClosedPositionsCount(
       stocks as IInvestmentData,
       AssetType.Stock,
     );
     dispatch(setStocksOpenClosedPositions(stocksOpenClosedPositions));
 
-    const rareMetalsOpenClosedPositions = getOpenClosedPositionsCount(
+    const rareMetalsOpenClosedPositions = getAssetOpenClosedPositionsCount(
       rareMetals as IInvestmentData,
       AssetType.RareMetal,
     );
     dispatch(setRareMetalsOpenClosedPositions(rareMetalsOpenClosedPositions));
 
-    const cryptoOpenClosedPositions = getOpenClosedPositionsCount(
+    const cryptoOpenClosedPositions = getAssetOpenClosedPositionsCount(
       crypto as IInvestmentData,
       AssetType.Crypto,
     );

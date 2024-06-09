@@ -16,6 +16,10 @@ const Sidebar = (props: ISidebarProps): JSX.Element => {
     (state: RootState) => state.pageSettings.sidebarIsOpen,
   );
 
+  const handleSidebarToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSidebarIsOpen(event.target.checked));
+  };
+
   return (
     <div className="drawer">
       <input
@@ -23,7 +27,7 @@ const Sidebar = (props: ISidebarProps): JSX.Element => {
         type="checkbox"
         className="drawer-toggle"
         checked={sidebarIsOpen}
-        onChange={(e) => dispatch(setSidebarIsOpen(e.target.checked))}
+        onChange={handleSidebarToggle}
       />
       <div className="drawer-content">{props.children}</div>
       <div className="drawer-side z-20">

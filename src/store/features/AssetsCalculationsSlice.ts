@@ -2,58 +2,58 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { IOpenClosedPositions } from "../../models/contracts/IOpenClosedPositions";
-import { ILastInvestmentData } from "../../models/contracts/ILastInvestmentData";
+import { IInvestmentTableData } from "../../models/contracts/IInvestmentTableData";
 
 interface IPageSettingsState {
   investedValuesAreCalculated: boolean;
   valuesByMonthAreCalculated: boolean;
-  lastInvestmentDataIsCalculated: boolean;
+  investmentTableDataIsCalculated: boolean;
 
   propertiesInvestedValue: number;
   propertiesOpenClosedPositions: IOpenClosedPositions;
   propertiesValueByMonth: number[];
-  propertiesLastInvestmentData: ILastInvestmentData[];
+  propertiesInvestmentTableData: IInvestmentTableData[];
 
   cryptoInvestedValue: number;
   cryptoOpenClosedPositions: IOpenClosedPositions;
   cryptoValueByMonth: number[];
-  cryptoLastInvestmentData: ILastInvestmentData[];
+  cryptoInvestmentTableData: IInvestmentTableData[];
 
   stocksInvestedValue: number;
   stocksOpenClosedPositions: IOpenClosedPositions;
   stocksValueByMonth: number[];
-  stocksLastInvestmentData: ILastInvestmentData[];
+  stocksInvestmentTableData: IInvestmentTableData[];
 
   rareMetalsInvestedValue: number;
   rareMetalsOpenClosedPositions: IOpenClosedPositions;
   rareMetalsValueByMonth: number[];
-  rareMetalsLastInvestmentData: ILastInvestmentData[];
+  rareMetalsInvestmentTableData: IInvestmentTableData[];
 }
 
 const initialState: IPageSettingsState = {
   investedValuesAreCalculated: false,
   valuesByMonthAreCalculated: false,
-  lastInvestmentDataIsCalculated: false,
+  investmentTableDataIsCalculated: false,
 
   propertiesInvestedValue: 0,
   propertiesOpenClosedPositions: { openCount: 0, closedCount: 0 },
   propertiesValueByMonth: [],
-  propertiesLastInvestmentData: [],
+  propertiesInvestmentTableData: [],
 
   cryptoInvestedValue: 0,
   cryptoOpenClosedPositions: { openCount: 0, closedCount: 0 },
   cryptoValueByMonth: [],
-  cryptoLastInvestmentData: [],
+  cryptoInvestmentTableData: [],
 
   stocksInvestedValue: 0,
   stocksOpenClosedPositions: { openCount: 0, closedCount: 0 },
   stocksValueByMonth: [],
-  stocksLastInvestmentData: [],
+  stocksInvestmentTableData: [],
 
   rareMetalsInvestedValue: 0,
   rareMetalsOpenClosedPositions: { openCount: 0, closedCount: 0 },
   rareMetalsValueByMonth: [],
-  rareMetalsLastInvestmentData: [],
+  rareMetalsInvestmentTableData: [],
 };
 
 export const AssetsCalculationsSlice = createSlice({
@@ -66,11 +66,11 @@ export const AssetsCalculationsSlice = createSlice({
     setValuesByMonthAreCalculated: (state, action: PayloadAction<boolean>) => {
       state.valuesByMonthAreCalculated = action.payload;
     },
-    setLastInvestmentDataIsCalcualted: (
+    setInvestmentTableDataIsCalcualted: (
       state,
       action: PayloadAction<boolean>,
     ) => {
-      state.lastInvestmentDataIsCalculated = action.payload;
+      state.investmentTableDataIsCalculated = action.payload;
     },
     setPropertiesInvestedValue: (state, action: PayloadAction<number>) => {
       state.propertiesInvestedValue = action.payload;
@@ -84,11 +84,11 @@ export const AssetsCalculationsSlice = createSlice({
     setPropertiesValueByMonth: (state, action: PayloadAction<number[]>) => {
       state.propertiesValueByMonth = [...action.payload];
     },
-    setPropertiesLastInvestmentData: (
+    setPropertiesInvestmentTableData: (
       state,
-      action: PayloadAction<ILastInvestmentData[]>,
+      action: PayloadAction<IInvestmentTableData[]>,
     ) => {
-      state.propertiesLastInvestmentData = [...action.payload];
+      state.propertiesInvestmentTableData = [...action.payload];
     },
     setCryptoInvestedValue: (state, action: PayloadAction<number>) => {
       state.cryptoInvestedValue = action.payload;
@@ -102,11 +102,11 @@ export const AssetsCalculationsSlice = createSlice({
     setCryptoValueByMonth: (state, action: PayloadAction<number[]>) => {
       state.cryptoValueByMonth = [...action.payload];
     },
-    setCryptoLastInvestmentData: (
+    setCryptoInvestmentTableData: (
       state,
-      action: PayloadAction<ILastInvestmentData[]>,
+      action: PayloadAction<IInvestmentTableData[]>,
     ) => {
-      state.cryptoLastInvestmentData = [...action.payload];
+      state.cryptoInvestmentTableData = [...action.payload];
     },
     setStocksInvestedValue: (state, action: PayloadAction<number>) => {
       state.stocksInvestedValue = action.payload;
@@ -120,11 +120,11 @@ export const AssetsCalculationsSlice = createSlice({
     setStocksValueByMonth: (state, action: PayloadAction<number[]>) => {
       state.stocksValueByMonth = [...action.payload];
     },
-    setStocksLastInvestmentData: (
+    setStocksInvestmentTableData: (
       state,
-      action: PayloadAction<ILastInvestmentData[]>,
+      action: PayloadAction<IInvestmentTableData[]>,
     ) => {
-      state.stocksLastInvestmentData = [...action.payload];
+      state.stocksInvestmentTableData = [...action.payload];
     },
     setRareMetalsInvestedValue: (state, action: PayloadAction<number>) => {
       state.rareMetalsInvestedValue = action.payload;
@@ -138,11 +138,11 @@ export const AssetsCalculationsSlice = createSlice({
     setRareMetalsValueByMonth: (state, action: PayloadAction<number[]>) => {
       state.rareMetalsValueByMonth = [...action.payload];
     },
-    setRareMetalsLastInvestmentData: (
+    setRareMetalsInvestmentTableData: (
       state,
-      action: PayloadAction<ILastInvestmentData[]>,
+      action: PayloadAction<IInvestmentTableData[]>,
     ) => {
-      state.rareMetalsLastInvestmentData = [...action.payload];
+      state.rareMetalsInvestmentTableData = [...action.payload];
     },
   },
 });
@@ -160,13 +160,13 @@ export const {
   setPropertiesValueByMonth,
   setRareMetalsValueByMonth,
   setStocksValueByMonth,
-  setCryptoLastInvestmentData,
-  setPropertiesLastInvestmentData,
-  setRareMetalsLastInvestmentData,
-  setStocksLastInvestmentData,
+  setCryptoInvestmentTableData,
+  setPropertiesInvestmentTableData,
+  setRareMetalsInvestmentTableData,
+  setStocksInvestmentTableData,
   setInvestedValuesAreCalculated,
   setValuesByMonthAreCalculated,
-  setLastInvestmentDataIsCalcualted,
+  setInvestmentTableDataIsCalcualted,
 } = AssetsCalculationsSlice.actions;
 
 export default AssetsCalculationsSlice;

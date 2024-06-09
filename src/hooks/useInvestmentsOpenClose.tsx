@@ -14,9 +14,9 @@ import { RootState, useAppDispatch } from "../store/store";
 import { AssetType } from "../models/enums/AssetType";
 import { ThemeType } from "../models/enums/ThemeType";
 import { ITransaction } from "../models/contracts/ITransaction";
-import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
+import { IInvestmentTableData } from "../models/contracts/IInvestmentTableData";
 
-const useInvestmentsOpenClose = (data: ILastInvestmentData) => {
+const useInvestmentsOpenClose = (data: IInvestmentTableData) => {
   const dispatch = useAppDispatch();
 
   const { themeType } = useSelector((state: RootState) => state.pageSettings);
@@ -26,7 +26,7 @@ const useInvestmentsOpenClose = (data: ILastInvestmentData) => {
   const textColor = themeType === ThemeType.Light ? "text-gray" : "text-white";
 
   function addTransaction(
-    data: ILastInvestmentData,
+    data: IInvestmentTableData,
     newLastTransaction: ITransaction,
   ) {
     switch (data.assetType) {

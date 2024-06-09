@@ -3,17 +3,17 @@ import { useSelector } from "react-redux";
 
 import { RootState, useAppDispatch } from "../store/store";
 import {
-  setCryptoLastInvestmentData,
-  setLastInvestmentDataIsCalcualted,
-  setPropertiesLastInvestmentData,
-  setRareMetalsLastInvestmentData,
-  setStocksLastInvestmentData,
+  setCryptoInvestmentTableData,
+  setInvestmentTableDataIsCalcualted,
+  setPropertiesInvestmentTableData,
+  setRareMetalsInvestmentTableData,
+  setStocksInvestmentTableData,
 } from "../store/features/AssetsCalculationsSlice";
 
 import { AssetType } from "../models/enums/AssetType";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 
-import { getLastInvestmentsData } from "../utils/assets-helper";
+import { getAssetInvestmentTableData } from "../utils/assets-helper";
 
 const useInvestmentsManagement = () => {
   const dispatch = useAppDispatch();
@@ -23,53 +23,53 @@ const useInvestmentsManagement = () => {
   );
 
   const {
-    propertiesLastInvestmentData,
-    cryptoLastInvestmentData,
-    stocksLastInvestmentData,
-    rareMetalsLastInvestmentData,
-    lastInvestmentDataIsCalculated,
+    propertiesInvestmentTableData,
+    cryptoInvestmentTableData,
+    stocksInvestmentTableData,
+    rareMetalsInvestmentTableData,
+    investmentTableDataIsCalculated,
   } = useSelector((state: RootState) => state.assetsCalculations);
 
-  const calculateLastInvestments = () => {
-    const propertiesLastInvestmentData = getLastInvestmentsData(
+  const calculateInvestmentTableData = () => {
+    const propertiesInvestmentTableData = getAssetInvestmentTableData(
       properties as IInvestmentData,
       AssetType.Property,
     );
-    dispatch(setPropertiesLastInvestmentData(propertiesLastInvestmentData));
+    dispatch(setPropertiesInvestmentTableData(propertiesInvestmentTableData));
 
-    const cryptoLastInvestmentData = getLastInvestmentsData(
+    const cryptoInvestmentTableData = getAssetInvestmentTableData(
       crypto as IInvestmentData,
       AssetType.Crypto,
     );
-    dispatch(setCryptoLastInvestmentData(cryptoLastInvestmentData));
+    dispatch(setCryptoInvestmentTableData(cryptoInvestmentTableData));
 
-    const rareMetalsLastInvestmentData = getLastInvestmentsData(
+    const rareMetalsInvestmentTableData = getAssetInvestmentTableData(
       rareMetals as IInvestmentData,
       AssetType.RareMetal,
     );
-    dispatch(setRareMetalsLastInvestmentData(rareMetalsLastInvestmentData));
+    dispatch(setRareMetalsInvestmentTableData(rareMetalsInvestmentTableData));
 
-    const stocksLastInvestmentData = getLastInvestmentsData(
+    const stocksInvestmentTableData = getAssetInvestmentTableData(
       stocks as IInvestmentData,
       AssetType.Stock,
     );
-    dispatch(setStocksLastInvestmentData(stocksLastInvestmentData));
+    dispatch(setStocksInvestmentTableData(stocksInvestmentTableData));
 
-    dispatch(setLastInvestmentDataIsCalcualted(true));
+    dispatch(setInvestmentTableDataIsCalcualted(true));
   };
 
   React.useEffect(() => {
     if (properties && crypto && stocks && rareMetals) {
-      calculateLastInvestments();
+      calculateInvestmentTableData();
     }
   }, [properties, crypto, stocks, rareMetals]);
 
   return {
-    stocksLastInvestmentData,
-    propertiesLastInvestmentData,
-    rareMetalsLastInvestmentData,
-    cryptoLastInvestmentData,
-    lastInvestmentDataIsCalculated,
+    stocksInvestmentTableData,
+    propertiesInvestmentTableData,
+    rareMetalsInvestmentTableData,
+    cryptoInvestmentTableData,
+    investmentTableDataIsCalculated,
   };
 };
 

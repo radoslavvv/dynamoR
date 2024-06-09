@@ -7,7 +7,7 @@ import { ISeriesPrice } from "../models/contracts/ISeriesPrice";
 import { IWalletBalance } from "../models/contracts/IWalletBalance";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
 import { IOpenClosedPositions } from "../models/contracts/IOpenClosedPositions";
-import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
+import { IInvestmentTableData as IInvestmentTableData } from "../models/contracts/IInvestmentTableData";
 
 import { DATE_FORMAT } from "./constants";
 
@@ -36,7 +36,7 @@ export const getAssetInvestedValue = (
     const lastTransaction =
       currentAsset.transactions[currentAsset.transactions.length - 1];
 
-    const currentPrice = getLastAssetPrice(
+    const currentPrice = getAssetLastMarketPrice(
       data.marketPrices,
       assetType,
       (currentAsset.address || currentAsset.name)!,
@@ -52,7 +52,7 @@ export const getAssetInvestedValue = (
   return value;
 };
 
-export const getLastAssetPrice = (
+export const getAssetLastMarketPrice = (
   marketPrices: IMarketPrice[],
   assetType: AssetType,
   filterValue: string,
@@ -70,7 +70,7 @@ export const getLastAssetPrice = (
   return marketPrice.seriesPrice[marketPrice.seriesPrice.length - 1].value;
 };
 
-export const getLastAssetTransaction = (
+export const getAssetLastTransaction = (
   walletBalance: IWalletBalance[],
   assetType: AssetType,
   filterValue: string,
@@ -106,7 +106,7 @@ export const getAssetSeriesPrices = (
   return marketPrice.seriesPrice;
 };
 
-export const getOpenClosedPositionsCount = (
+export const getAssetOpenClosedPositionsCount = (
   investmentData: IInvestmentData,
   assetType: AssetType,
 ): IOpenClosedPositions => {
@@ -132,7 +132,7 @@ export const getOpenClosedPositionsCount = (
   return openClosedPositionsCount;
 };
 
-export const getMonthsLastDates = (
+export const getMarketDataMonthsLastDates = (
   investmentData: IInvestmentData,
 ): string[] => {
   const lastDates = [];
@@ -155,13 +155,13 @@ export const getMonthsLastDates = (
   return lastDates;
 };
 
-export const getInvestmentValueByMonths = (
+export const getAssetInvestmentValueByMonths = (
   investmentData: IInvestmentData,
   assetType: AssetType,
 ): number[] => {
   const investmentValueByMonths: number[] = [];
 
-  const monthsLastDates = getMonthsLastDates(investmentData);
+  const monthsLastDates = getMarketDataMonthsLastDates(investmentData);
   for (let i = 0; i < monthsLastDates.length; i++) {
     const currentMonthLastDate = monthsLastDates[i];
 
@@ -208,11 +208,11 @@ export const getInvestmentValueByMonths = (
   return investmentValueByMonths;
 };
 
-export const getLastInvestmentsData = (
+export const getAssetInvestmentTableData = (
   investmentData: IInvestmentData,
   assetType: AssetType,
-): ILastInvestmentData[] => {
-  const lastInvestmentData: ILastInvestmentData[] = [];
+): IInvestmentTableData[] => {
+  const investmentTableData: IInvestmentTableData[] = [];
   for (let i = 0; i < investmentData.walletBalance.length; i++) {
     const currentAsset = investmentData.walletBalance[i];
 
@@ -227,7 +227,7 @@ export const getLastInvestmentsData = (
       currentAsset.name)!;
 
     const marketPrice =
-      getLastAssetPrice(
+      getAssetLastMarketPrice(
         investmentData.marketPrices,
         assetType,
         marketPriceFilterValue,
@@ -241,7 +241,7 @@ export const getLastInvestmentsData = (
       marketPriceFilterValue,
     );
 
-    lastInvestmentData.push({
+    investmentTableData.push({
       name: (currentAsset.address || currentAsset.name)!,
       balance: lastTransaction.balance,
       value: value,
@@ -253,24 +253,24 @@ export const getLastInvestmentsData = (
     });
   }
 
-  return lastInvestmentData;
+  return investmentTableData;
 };
 
 export const getInvestmentTabTableData = (
   selectedTab: AssetType,
-  propertiesLastInvestmentData: ILastInvestmentData[],
-  cryptoLastInvestmentData: ILastInvestmentData[],
-  stocksLastInvestmentData: ILastInvestmentData[],
-  rareMetalsLastInvestmentData: ILastInvestmentData[],
-): ILastInvestmentData[] => {
+  propertiesInvestmentTableData: IInvestmentTableData[],
+  cryptoInvestmentTableData: IInvestmentTableData[],
+  stocksInvestmentTableData: IInvestmentTableData[],
+  rareMetalsInvestmentTableData: IInvestmentTableData[],
+): IInvestmentTableData[] => {
   switch (selectedTab) {
     case AssetType.Property:
-      return propertiesLastInvestmentData;
+      return propertiesInvestmentTableData;
     case AssetType.Crypto:
-      return cryptoLastInvestmentData;
+      return cryptoInvestmentTableData;
     case AssetType.Stock:
-      return stocksLastInvestmentData;
+      return stocksInvestmentTableData;
     case AssetType.RareMetal:
-      return rareMetalsLastInvestmentData;
+      return rareMetalsInvestmentTableData;
   }
 };

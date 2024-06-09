@@ -4,21 +4,21 @@ import { useSelector } from "react-redux";
 
 import { RootState, useAppDispatch } from "../store/store";
 import {
-  setCryptoLastInvestmentData,
-  setPropertiesLastInvestmentData,
-  setRareMetalsLastInvestmentData,
-  setStocksLastInvestmentData,
+  setCryptoInvestmentTableData,
+  setPropertiesInvestmentTableData,
+  setRareMetalsInvestmentTableData,
+  setStocksInvestmentTableData,
 } from "../store/features/AssetsCalculationsSlice";
 
 import { AssetType } from "../models/enums/AssetType";
 import { ThemeType } from "../models/enums/ThemeType";
 import { IInvestmentData } from "../models/contracts/IInvestmentData";
-import { ILastInvestmentData } from "../models/contracts/ILastInvestmentData";
+import { IInvestmentTableData } from "../models/contracts/IInvestmentTableData";
 
 import { DATE_FORMAT } from "../utils/constants";
-import { getLastInvestmentsData } from "../utils/assets-helper";
+import { getAssetInvestmentTableData } from "../utils/assets-helper";
 
-const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
+const useMarketChartData = (investmentTableData: IInvestmentTableData) => {
   const dispatch = useAppDispatch();
 
   const { properties, crypto, stocks, rareMetals } = useSelector(
@@ -26,51 +26,51 @@ const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
   );
 
   const {
-    propertiesLastInvestmentData,
-    cryptoLastInvestmentData,
-    stocksLastInvestmentData,
-    rareMetalsLastInvestmentData,
-    lastInvestmentDataIsCalculated,
+    propertiesInvestmentTableData,
+    cryptoInvestmentTableData,
+    stocksInvestmentTableData,
+    rareMetalsInvestmentTableData,
+    investmentTableDataIsCalculated,
   } = useSelector((state: RootState) => state.assetsCalculations);
 
   const themeType: ThemeType = useSelector(
     (state: RootState) => state.pageSettings.themeType,
   );
 
-  const calculateLastInvestments = () => {
-    const propertiesLastInvestmentData = getLastInvestmentsData(
+  const calculateInvestmentTableData = () => {
+    const propertiesInvestmentTableData = getAssetInvestmentTableData(
       properties as IInvestmentData,
       AssetType.Property,
     );
-    dispatch(setPropertiesLastInvestmentData(propertiesLastInvestmentData));
+    dispatch(setPropertiesInvestmentTableData(propertiesInvestmentTableData));
 
-    const cryptoLastInvestmentData = getLastInvestmentsData(
+    const cryptoInvestmentTableData = getAssetInvestmentTableData(
       crypto as IInvestmentData,
       AssetType.Crypto,
     );
-    dispatch(setCryptoLastInvestmentData(cryptoLastInvestmentData));
+    dispatch(setCryptoInvestmentTableData(cryptoInvestmentTableData));
 
-    const rareMetalsLastInvestmentData = getLastInvestmentsData(
+    const rareMetalsInvestmentTableData = getAssetInvestmentTableData(
       rareMetals as IInvestmentData,
       AssetType.RareMetal,
     );
-    dispatch(setRareMetalsLastInvestmentData(rareMetalsLastInvestmentData));
+    dispatch(setRareMetalsInvestmentTableData(rareMetalsInvestmentTableData));
 
-    const stocksLastInvestmentData = getLastInvestmentsData(
+    const stocksInvestmentTableData = getAssetInvestmentTableData(
       stocks as IInvestmentData,
       AssetType.Stock,
     );
-    dispatch(setStocksLastInvestmentData(stocksLastInvestmentData));
+    dispatch(setStocksInvestmentTableData(stocksInvestmentTableData));
   };
 
   const color = themeType === ThemeType.Dark ? "white" : "black";
 
   const chartStartDate = moment(
-    lastInvestmentData.seriesPrice[0].date,
+    investmentTableData.seriesPrice[0].date,
     DATE_FORMAT,
   ).toDate();
   const chartEndDate = moment(
-    lastInvestmentData.seriesPrice[lastInvestmentData.seriesPrice.length - 1]
+    investmentTableData.seriesPrice[investmentTableData.seriesPrice.length - 1]
       .date,
     DATE_FORMAT,
   ).toDate();
@@ -136,7 +136,7 @@ const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
     series: [
       {
         name: "Value",
-        data: lastInvestmentData.seriesPrice.map(
+        data: investmentTableData.seriesPrice.map(
           (c) => Math.round(c.value * 100) / 100,
         ),
       },
@@ -161,17 +161,17 @@ const useMarketChartData = (lastInvestmentData: ILastInvestmentData) => {
 
   React.useEffect(() => {
     if (properties && crypto && stocks && rareMetals) {
-      calculateLastInvestments();
+      calculateInvestmentTableData();
     }
   }, [properties, crypto, stocks, rareMetals]);
 
   return {
-    stocksLastInvestmentData,
-    propertiesLastInvestmentData,
-    rareMetalsLastInvestmentData,
-    cryptoLastInvestmentData,
+    stocksInvestmentTableData,
+    propertiesInvestmentTableData,
+    rareMetalsInvestmentTableData,
+    cryptoInvestmentTableData,
     chartOptions,
-    lastInvestmentDataIsCalculated,
+    investmentTableDataIsCalculated,
   };
 };
 
