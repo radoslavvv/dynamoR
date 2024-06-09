@@ -3,6 +3,7 @@ import { IInvestmentData } from "../models/contracts/IInvestmentData";
 // import { DYNAMO_API_URL } from "../utils/constants";
 import { crypto, properties, rareMaterials, stocks, user } from "../data/data";
 import { IUserData } from "../models/contracts/IUserData";
+import { DYNAMO_API_URL } from "../utils/constants";
 
 export const loadProperitesData = async (): Promise<IInvestmentData> => {
   // const axiosInstance = axios.create({
@@ -51,5 +52,13 @@ export const loadUserData = async (): Promise<IUserData> => {
 
 export const getDataFromURL = async (url: string): Promise<IInvestmentData> => {
   const response = await axios.get<IInvestmentData>(url);
+  return response.data;
+};
+
+export const submitUserAccountSettings = async (
+  userData: IUserData,
+): Promise<IUserData> => {
+  const url = `${DYNAMO_API_URL}/users/424e8f2e-0148-431c-82fe-d5742b3ad6cd`;
+  const response = await axios.put<IUserData>(url, userData);
   return response.data;
 };

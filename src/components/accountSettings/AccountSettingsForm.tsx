@@ -1,7 +1,15 @@
+import React from "react";
+import useAccountSettingsForm from "../../hooks/useAccountSettingsForm";
 import useUserData from "../../hooks/useUserData";
+import { IUserData } from "../../models/contracts/IUserData";
 
 const AccountSettingsForm = (): JSX.Element => {
   const { userData } = useUserData();
+  const { submitForm } = useAccountSettingsForm();
+
+  const [formUserData, setFormUserData] = React.useState<IUserData>({
+    ...userData!,
+  });
 
   return (
     <div className="card w-96 animate-slideUp bg-base-200 shadow-xl">
@@ -14,7 +22,10 @@ const AccountSettingsForm = (): JSX.Element => {
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
-            value={userData?.firstName}
+            value={formUserData?.firstName}
+            onChange={(e) =>
+              setFormUserData({ ...formUserData, firstName: e.target.value })
+            }
           />
         </label>
 
@@ -26,7 +37,10 @@ const AccountSettingsForm = (): JSX.Element => {
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
-            value={userData?.lastName}
+            value={formUserData?.lastName}
+            onChange={(e) =>
+              setFormUserData({ ...formUserData, lastName: e.target.value })
+            }
           />
         </label>
 
@@ -39,7 +53,10 @@ const AccountSettingsForm = (): JSX.Element => {
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
             min={1}
-            value={userData?.age}
+            value={formUserData?.age}
+            onChange={(e) =>
+              setFormUserData({ ...formUserData, age: Number(e.target.value) })
+            }
           />
         </label>
 
@@ -51,7 +68,10 @@ const AccountSettingsForm = (): JSX.Element => {
             type="email"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
-            value={userData?.email}
+            value={formUserData?.email}
+            onChange={(e) =>
+              setFormUserData({ ...formUserData, email: e.target.value })
+            }
           />
         </label>
 
@@ -63,12 +83,20 @@ const AccountSettingsForm = (): JSX.Element => {
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
-            value={userData?.avatarUrl}
+            value={formUserData?.avatarUrl}
+            onChange={(e) =>
+              setFormUserData({ ...formUserData, avatarUrl: e.target.value })
+            }
           />
         </label>
 
         <div className="mt-5 flex items-center justify-center">
-          <button className="btn btn-secondary">Save Data</button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => submitForm(formUserData)}
+          >
+            Save Data
+          </button>
         </div>
       </div>
     </div>
