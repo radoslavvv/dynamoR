@@ -1,30 +1,68 @@
-# React + TypeScript + Vite
+# dynamoR
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+dynamoR is a web application designed for efficient investment portfolio management and tracking. Whether you're a novice investor or a seasoned portfolio manager, dynamoR provides the tools you need to monitor and optimize your investments. With a user-friendly interface, comprehensive analytics, and real-time performance tracking, dynamoR helps you stay on top of your financial goals.
 
-Currently, two official plugins are available:
+<div align="center">
+  <kbd>
+    <img src="https://i.imgur.com/0haZlRW.png" />
+  </kbd>
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+dynamoR offers a comprehensive solution for managing and tracking your investment portfolio. Designed to cater to both novice and experienced investors, dynamoR provides a suite of tools to help you stay informed and make strategic investment decisions.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Easily view detailed information about all your investments in one place, monitor the growth of your portfolio over time with intuitive charts and graphs, and gain insights into your investment performance with a variety of analytical tools. Seamlessly manage your investments with functionalities to open and close positions. With its user-friendly interface and powerful features, dynamoR empowers you to take control of your financial future.
 
-- Configure the top-level `parserOptions` property like this:
+### Features
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- **Investments Value Data Statistics:** View the current value of your investment portfolio at a glance.
+- **Analytics Charts:** Visualize your portfolio with a pie chart showing value allocation and a value growth chart displaying portfolio value movement over time across different categories.
+- **Investments Management Tool:** Seamlessly manage your assets with functionalities to open and close positions.
+- **User Account Options:** Customize your experience with options to update your account data and change your theme.
+- **Responsive Design:** Enjoy a seamless user experience across all devices.
+
+### Built with
+
+- Vite
+- TypeScript
+- Tailwind
+- DaisyUI
+- React
+- Redux (Redux Toolkit)
+- React Router
+- SweetAlert2
+
+### Deployed with
+
+- [Netlify](https://dynamor.netlify.app)
+
+## Getting started
+
+### Usage
+
+You can access the application [online](https://dynamor.netlify.app) or clone it and run it locally.
+
+### Installation
+
+Once the dynamoR repository is cloned:
+
+```
+cd dynamoR
+npm install
+npm start dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Back matter
+
+### Legal disclaimer
+
+Usage of this tool for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state, and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program.
+
+### Acknowledgements
+
+Special thanks to [Dynamo Software](https://www.dynamosoftware.com/)
+
+### License
+
+This project is licensed under the [MIT License](LICENSE.md).
