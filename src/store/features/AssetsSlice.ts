@@ -126,6 +126,82 @@ export const AssetsSlice = createSlice({
         // }
       }
     },
+    addCryptoTransaction: (
+      state,
+      action: PayloadAction<{
+        transaction: ITransaction;
+        assetType: AssetType;
+        name: string;
+      }>,
+    ) => {
+      state.crypto?.walletBalance.map((wb) => {
+        if (
+          wb.address === action.payload.name ||
+          wb.name === action.payload.name
+        ) {
+          wb.transactions = [...wb.transactions, action.payload.transaction];
+        }
+      });
+
+      state.crypto = { ...state.crypto! };
+    },
+    addPropertiesTransaction: (
+      state,
+      action: PayloadAction<{
+        transaction: ITransaction;
+        assetType: AssetType;
+        name: string;
+      }>,
+    ) => {
+      state.properties?.walletBalance.map((wb) => {
+        if (
+          wb.address === action.payload.name ||
+          wb.name === action.payload.name
+        ) {
+          wb.transactions = [...wb.transactions, action.payload.transaction];
+        }
+      });
+
+      state.properties = { ...state.properties! };
+    },
+    addStocksTransaction: (
+      state,
+      action: PayloadAction<{
+        transaction: ITransaction;
+        assetType: AssetType;
+        name: string;
+      }>,
+    ) => {
+      state.stocks?.walletBalance.map((wb) => {
+        if (
+          wb.address === action.payload.name ||
+          wb.name === action.payload.name
+        ) {
+          wb.transactions = [...wb.transactions, action.payload.transaction];
+        }
+      });
+
+      state.stocks = { ...state.stocks! };
+    },
+    addRareMetalsTransaction: (
+      state,
+      action: PayloadAction<{
+        transaction: ITransaction;
+        assetType: AssetType;
+        name: string;
+      }>,
+    ) => {
+      state.rareMetals?.walletBalance.map((wb) => {
+        if (
+          wb.address === action.payload.name ||
+          wb.name === action.payload.name
+        ) {
+          wb.transactions = [...wb.transactions, action.payload.transaction];
+        }
+      });
+
+      state.rareMetals = { ...state.rareMetals! };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPropertiesData.fulfilled, (state, action) => {
@@ -152,6 +228,10 @@ export const {
   setRareMaterials,
   setStocks,
   closePosition,
+  addCryptoTransaction,
+  addPropertiesTransaction,
+  addRareMetalsTransaction,
+  addStocksTransaction,
 } = AssetsSlice.actions;
 
 export default AssetsSlice;

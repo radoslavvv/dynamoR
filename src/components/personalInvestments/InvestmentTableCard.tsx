@@ -10,8 +10,16 @@ import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
 import { ThemeType } from "../../models/enums/ThemeType";
-import { closePosition } from "../../store/features/AssetsSlice";
+import {
+  addCryptoTransaction,
+  addPropertiesTransaction,
+  addRareMetalsTransaction,
+  addStocksTransaction,
+} from "../../store/features/AssetsSlice";
+import moment from "moment";
 import { AssetType } from "../../models/enums/AssetType";
+import { ITransaction } from "../../models/contracts/ITransaction";
+import { DATE_FORMAT } from "../../utils/constants";
 
 interface IInvestmentTableCardProps {
   data: ILastInvestmentData;
@@ -25,6 +33,50 @@ const InvestmentTableCard = ({
 
   const { chartOptions } = useMarketChartData(data);
 
+  const addTransaction = (
+    data: ILastInvestmentData,
+    newLastTransaction: ITransaction,
+  ) => {
+    switch (data.assetType) {
+      case AssetType.Crypto:
+        dispatch(
+          addCryptoTransaction({
+            transaction: newLastTransaction,
+            assetType: data.assetType,
+            name: data.name,
+          }),
+        );
+        break;
+      case AssetType.Property:
+        dispatch(
+          addPropertiesTransaction({
+            transaction: newLastTransaction,
+            assetType: data.assetType,
+            name: data.name,
+          }),
+        );
+        break;
+      case AssetType.RareMetal:
+        dispatch(
+          addRareMetalsTransaction({
+            transaction: newLastTransaction,
+            assetType: data.assetType,
+            name: data.name,
+          }),
+        );
+        break;
+      case AssetType.Stock:
+        dispatch(
+          addStocksTransaction({
+            transaction: newLastTransaction,
+            assetType: data.assetType,
+            name: data.name,
+          }),
+        );
+        break;
+    }
+  };
+  
   const closePositionDialog = () => {
     const MySwal = withReactContent(Swal);
 
@@ -34,6 +86,13 @@ const InvestmentTableCard = ({
     MySwal.fire({
       title: "Are you sure you want to close this position?",
       showCancelButton: true,
+      input: "number",
+      inputAttributes: {
+        min: "0",
+        max: data.balance.toString(),
+        step: "0.0000000000000001",
+      },
+      inputValue: data.balance,
       confirmButtonText: "Close",
       customClass: {
         confirmButton: "btn btn-secondary",
@@ -42,21 +101,16 @@ const InvestmentTableCard = ({
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        // const lastTransaction = data.transactions[data.transactions.length - 1];
-        // let newLastTransaction = null;
-        // if (data.assetType === AssetType.Property) {
-        //   newLastTransaction = { ...lastTransaction, amount: 0 };
-        // } else {
-        //   newLastTransaction = { ...lastTransaction, open: false };
-        // }
+        const lastTransaction = data.transactions[data.transactions.length - 1];
+        let newLastTransaction = null;
+        newLastTransaction = {
+          ...lastTransaction,
+          balance: lastTransaction.balance - Number(result.value),
+          amount: Number(result.value) * -1,
+          date: moment().format(DATE_FORMAT),
+        };
 
-        // dispatch(
-        //   closePosition({
-        //     transaction: newLastTransaction,
-        //     assetType: data.assetType,
-        //     name: data.name,
-        //   }),
-        // );
+        addTransaction(data, newLastTransaction);
 
         Swal.fire({
           title: "Position was closed successfully!",
@@ -89,19 +143,21 @@ const InvestmentTableCard = ({
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        // dispatch(
-        //   closePosition({
-        //     transaction: {
-        //       amount: 1000,
+        const lastTransaction = data.transactions[data.transactions.length - 1];
+        let newLastTransaction = null;
 
-        //     },
-        //     assetType: data.assetType,
-        //     name: data.name,
-        //   }),
-        // );
+        newLastTransaction = {
+          ...lastTransaction,
+          open: true,
+          balance: lastTransaction.balance + Number(result.value),
+          amount: Number(result.value) + 1,
+          date: moment().format(DATE_FORMAT),
+        };
+
+        addTransaction(data, newLastTransaction);
 
         Swal.fire({
-          title: "Position was opened successfully!",
+          title: "Position was closed successfully!",
           icon: "success",
           customClass: {
             confirmButton: "btn btn-secondary",
@@ -126,21 +182,25 @@ const InvestmentTableCard = ({
           </p>
           <p className="flex flex-1 flex-col">
             <span className="text-gray-400">Amount:</span>
-            {formatNumber(data.amount)}
-          </p>
-          <p className="flex flex-1 flex-col">
-            <span className="text-gray-400">Balance:</span>$
             {formatNumber(data.balance)}
           </p>
           <p className="flex flex-1 flex-col">
+            <span className="text-gray-400">Balance:</span>$
+            {formatNumber(data.value)}
+          </p>
+          <p className="flex flex-1 flex-col">
             <span className="text-gray-400">Position:</span>
-            {data.position ? "Open" : "Closed"}
+            {data.balance > 0 ? "Open" : "Closed"}
+          </p>
+          <p className="flex flex-1 flex-col">
+            <span className="text-gray-400">Last Transaction Date:</span>
+            {data.date}
           </p>
 
           <p className="flex w-full flex-1  flex-col self-center">
             <button
               className="btn btn-secondary"
-              disabled={!data.position}
+              disabled={data.balance === 0}
               onClick={closePositionDialog}
             >
               Close
@@ -148,11 +208,7 @@ const InvestmentTableCard = ({
           </p>
 
           <p className="flex w-full flex-1  flex-col self-center">
-            <button
-              className="btn btn-secondary"
-              disabled={data.position}
-              onClick={openPositionDialog}
-            >
+            <button className="btn btn-secondary" onClick={openPositionDialog}>
               Open
             </button>
           </p>

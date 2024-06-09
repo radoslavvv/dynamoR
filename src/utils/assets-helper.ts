@@ -247,10 +247,7 @@ export const getLastInvestmentsData = (
         marketPriceFilterValue,
       ) || 0;
 
-    const balance =
-      assetType === AssetType.Property
-        ? lastTransaction.amount * marketPrice
-        : lastTransaction.balance * marketPrice;
+    const value = lastTransaction.balance * marketPrice;
 
     const seriesPrices = getAssetSeriesPrices(
       investmentData.marketPrices,
@@ -260,16 +257,18 @@ export const getLastInvestmentsData = (
 
     lastInvestmentData.push({
       name: (currentAsset.address || currentAsset.name)!,
-      balance: balance,
-      amount: (lastTransaction.amount || lastTransaction.balance)!,
-      position:
-        assetType === AssetType.Property
-          ? lastTransaction.amount > 0
-          : lastTransaction.open!,
+      balance: lastTransaction.balance,
+      // amount: lastTransaction.amount,
+      value: value,
+      // position:
+      // assetType === AssetType.Property
+      //   ? lastTransaction.amount > 0
+      //   : lastTransaction.open!,
       marketPrice: marketPrice || 0,
       seriesPrice: seriesPrices,
       assetType: assetType,
-      transactions: currentAsset.transactions
+      transactions: currentAsset.transactions,
+      date: lastTransaction.date,
     });
   }
 
