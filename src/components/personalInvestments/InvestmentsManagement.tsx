@@ -4,17 +4,17 @@ import InvestmentTableCard from "./InvestmentTableCard";
 
 import { AssetType } from "../../models/enums/AssetType";
 
-import useInvestments from "../../hooks/useInvestments";
 import { getInvestmentTabTableData } from "../../utils/assets-helper";
+import useInvestmentsManagement from "../../hooks/useInvestmentsManagement";
 
-const Investments = (): JSX.Element => {
+const InvestmentsManagement = (): JSX.Element => {
   const {
     stocksLastInvestmentData,
     propertiesLastInvestmentData,
     rareMetalsLastInvestmentData,
     cryptoLastInvestmentData,
     lastInvestmentDataIsCalculated,
-  } = useInvestments();
+  } = useInvestmentsManagement();
 
   const [selectedTab, setSelectedTab] = React.useState<AssetType>(
     AssetType.Property,
@@ -35,7 +35,7 @@ const Investments = (): JSX.Element => {
   return (
     <div className="mb-5 w-full flex-1 animate-slideUp">
       <h1 className="mb-3 flex justify-start text-2xl font-bold">
-        Investments:
+        Investments Management:
       </h1>
       <div className="rounded-3xl bg-base-300 p-5 shadow-xl">
         <div role="tablist" className="tabs tabs-bordered mb-5">
@@ -79,4 +79,4 @@ const Investments = (): JSX.Element => {
   );
 };
 
-export default Investments;
+export default InvestmentsManagement;

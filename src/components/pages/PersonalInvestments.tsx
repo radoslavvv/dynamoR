@@ -1,6 +1,6 @@
 import React from "react";
 
-import Investments from "../personalInvestments/Investments";
+import Investments from "../personalInvestments/InvestmentsManagement";
 import InvestedValues from "../personalInvestments/InvestedValues";
 import InvestmentsPieChart from "../personalInvestments/InvestmentsPieChart";
 import InvestmentsGrowthChart from "../personalInvestments/InvestmentsGrowthChart";

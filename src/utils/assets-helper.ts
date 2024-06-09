@@ -183,7 +183,7 @@ export const getInvestmentValueByMonths = (
 
       const transactionsBeforeLastDate = currentAsset.transactions.filter(
         (t) =>
-          moment(t.date, DATE_FORMAT) <
+          moment(t.date, DATE_FORMAT) <=
           moment(currentMonthLastDate, DATE_FORMAT),
       );
 

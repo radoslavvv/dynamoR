@@ -19,7 +19,7 @@ import {
   getInvestmentValueByMonths,
   getMonthsLastDates,
 } from "../utils/assets-helper";
-import { DATE_FORMAT } from "../utils/constants";
+import { CHART_COLORS, CHART_LABELS, DATE_FORMAT } from "../utils/constants";
 
 const useValueGrowth = () => {
   const dispatch = useAppDispatch();
@@ -158,20 +158,24 @@ const useValueGrowth = () => {
     },
     series: [
       {
-        name: "Properties",
-        data: propertiesValueByMonth,
+        name: CHART_LABELS.properties,
+        data: [...propertiesValueByMonth],
+        color: CHART_COLORS.properties,
       },
       {
-        name: "Crypto",
-        data: cryptoValueByMonth,
+        name: CHART_LABELS.crypto,
+        data: [...cryptoValueByMonth],
+        color: CHART_COLORS.crypto,
       },
       {
-        name: "Stocks",
-        data: stocksValueByMonth,
+        name: CHART_LABELS.stocks,
+        data: [...stocksValueByMonth],
+        color: CHART_COLORS.stocks,
       },
       {
-        name: "Rare Materials",
-        data: rareMetalsValueByMonth,
+        name: CHART_LABELS.rareMetals,
+        data: [...rareMetalsValueByMonth],
+        color: CHART_COLORS.rareMetals,
       },
     ],
     responsive: {

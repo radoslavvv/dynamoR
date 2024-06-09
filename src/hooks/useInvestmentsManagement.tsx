@@ -15,7 +15,7 @@ import { IInvestmentData } from "../models/contracts/IInvestmentData";
 
 import { getLastInvestmentsData } from "../utils/assets-helper";
 
-const useInvestments = () => {
+const useInvestmentsManagement = () => {
   const dispatch = useAppDispatch();
 
   const { properties, crypto, stocks, rareMetals } = useSelector(
@@ -73,4 +73,4 @@ const useInvestments = () => {
   };
 };
 
-export default useInvestments;
+export default useInvestmentsManagement;

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 
 import { RootState } from "../store/store";
+import { CHART_COLORS, CHART_LABELS } from "../utils/constants";
 
 const useValueAllocation = () => {
   const propertiesInvestedValue: number = useSelector(
@@ -35,20 +36,24 @@ const useValueAllocation = () => {
 
   const pieChartData = [
     {
-      name: "Properties",
+      name: CHART_LABELS.properties,
       y: propertiesPercentage,
+      color: CHART_COLORS.properties,
     },
     {
-      name: "Crypto",
+      name: CHART_LABELS.crypto,
       y: cryptoPercentage,
+      color: CHART_COLORS.crypto,
     },
     {
-      name: "Stocks",
+      name: CHART_LABELS.stocks,
       y: stocksPercentage,
+      color: CHART_COLORS.stocks,
     },
     {
-      name: "Rare Metals",
+      name: CHART_LABELS.rareMetals,
       y: rareMetalsPercentage,
+      color: CHART_COLORS.rareMetals,
     },
   ];
 
@@ -75,7 +80,7 @@ const useValueAllocation = () => {
           {
             enabled: true,
             distance: -40,
-            format: "{point.percentage:1f}%",
+            format: "{point.percentage:.2f}%",
             style: {
               fontSize: "1.2em",
               textOutline: "none",
@@ -88,6 +93,9 @@ const useValueAllocation = () => {
             },
           },
         ],
+      },
+      pie: {
+        borderColor: "transparent",
       },
     },
     series: [

@@ -2,6 +2,7 @@ import InvestedValuesCard from "./InvestedValuesCard";
 
 import useInvestedValues from "../../hooks/useInvestedValues";
 import useOpenClosedPositions from "../../hooks/useOpenClosedPositions";
+import { CHART_LABELS } from "../../utils/constants";
 
 const InvestedValues = (): JSX.Element => {
   const {
@@ -38,25 +39,25 @@ const InvestedValues = (): JSX.Element => {
           />
 
           <InvestedValuesCard
-            title={"Properties"}
+            title={CHART_LABELS.properties}
             value={propertiesInvestedValue}
             openClosedPositions={propertiesOpenClosedPositions}
           />
 
           <InvestedValuesCard
-            title={"Stocks"}
+            title={CHART_LABELS.stocks}
             value={stocksInvestedValue}
             openClosedPositions={stocksOpenClosedPositions}
           />
 
           <InvestedValuesCard
-            title={"Crypto"}
+            title={CHART_LABELS.crypto}
             value={cryptoInvestedValue}
             openClosedPositions={cryptoOpenClosedPositions}
           />
 
           <InvestedValuesCard
-            title={"Rare Metals"}
+            title={CHART_LABELS.rareMetals}
             value={rareMetalsInvestedValue}
             openClosedPositions={rareMetalsOpenClosedPositions}
           />

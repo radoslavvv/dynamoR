@@ -37,5 +37,5 @@ export default {
     },
   },
   plugins: [require("daisyui")],
-  daisyui: { themes: ["dracula", "nord"] },
+  daisyui: { themes: ["dracula", "nord", "pastel"] },
 };
