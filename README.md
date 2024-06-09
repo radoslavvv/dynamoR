@@ -24,14 +24,15 @@ Easily view detailed information about all your investments in one place, monito
 
 ### Built with
 
-- Vite
-- TypeScript
-- Tailwind
-- DaisyUI
-- React
-- Redux (Redux Toolkit)
-- React Router
-- SweetAlert2
+- Vite - fast and efficient project bundler
+- TypeScript - strongly typed programming language that builds on JavaScript
+- Tailwind - utility-first CSS framework for rapid UI development
+- DaisyUI - component library that adds components to Tailwind CSS
+- React - front-end JavaScript library for building user interfaces
+- Redux (Redux Toolkit) - state management tool for managing application state efficiently
+- React Router DOM - library for handling routing in single-page applications
+- SweetAlert2 - library for creating beautiful and responsive popups and alerts
+- Highcharts - powerful library for creating interactive and responsive charts
 
 ### Deployed with
 
